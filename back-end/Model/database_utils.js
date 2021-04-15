@@ -1,4 +1,4 @@
-const {User,Answer,Question}= require('./Model.js')
+const {User,Answer,Question}= require('./database_model.js')
 
 
 async  function CreateUser (req){
@@ -12,6 +12,7 @@ async  function CreateUser (req){
      questings:[],
      answers:[]
     })
+
     await user.save();
     return 'successful sign up'
   }
