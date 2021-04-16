@@ -13,26 +13,19 @@ const UserSchema = new mongoose.Schema({
   })
 
 const QuestionSchema = new mongoose.Schema({
-    title:String,
-    question_text:String,
-    keywords:Array,
-    answers:Array,
-    question_date:String,
-    user :{
-      uid:String,
-      username:String
-    }
+    title : String,
+    question_text : String,
+    keywords : Array,
+    answers : Array,
+    question_date : String,
+    username : String
   })
 
 const AnswerSchema = new mongoose.Schema({
-    answer_id:String,
     answer_text:String,
     question_id:String,
     answer_date:String,
-    user :{
-      uid:String,
-      username:String
-    }
+    username:String
   })
 
 

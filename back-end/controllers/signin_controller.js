@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const secretToken = "very secure secret"
 
 
-
+                                        
 async function authorization(req, res, next){
     const user = await getUser(req.body.username)
     if (user.length == 0) {res.status(400).send('Username does not exits')}
