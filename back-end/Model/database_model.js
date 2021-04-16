@@ -23,7 +23,8 @@ const QuestionSchema = new mongoose.Schema({
 
 const AnswerSchema = new mongoose.Schema({
     answer_text:String,
-    question_id:String,
+    question_title:String,
+    question_user:String,
     answer_date:String,
     username:String
   })

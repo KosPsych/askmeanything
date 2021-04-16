@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 require('./controllers/signup_controller')(app)
 require('./controllers/signin_controller')(app)
 require('./controllers/create_question_controller')(app)
+require('./controllers/create_answer_controller')(app)
 
   
 app.listen(3000,()=>console.log("listening"))

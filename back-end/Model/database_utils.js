@@ -58,17 +58,35 @@ async  function CreateQuestion (req){
        
     }   
 
-async  function CreateAnswer (){
+async  function getQuestion (username,title){
+      
+      const questions = await Question.find({username:username,title:title})
+      return questions
+  }  
+  
+async  function UpdateQuestion (question_title,name,answer_id){
+    const x = await Question.updateOne(
+     { title: question_title, username:name },
+    {
+      $push: { "answers": 'answer_id'}
+    }
+ )
+ return
+}
+
+async  function CreateAnswer (req){
       const answer = new Answer({
-        answer_id:"a_id",
-        answer_text:"my answer text",
-        question_id:"qid",
-        answer_date:"XX-LL-2009",
-        user :{
-          uid:'uid',
-          username:"zpower"
-              }
+        answer_text:req.body.answer_text,
+        question_title:req.body.question_title,
+        question_user:req.body.question_user,
+        answer_date:req.body.answer_date,
+        username:req.body.username
+        })
+      let answered = true
+      const ans = await answer.save().catch(error => {
+        answered=false 
       })
-      await answer.save();
+      if (answered) {return ['answer created',ans._id]}
+      else {return ['cannot create answer',null]}
     }    
-module.exports = {UpdUser,CreateQuestion,CreateUser,CreateAnswer,getUser}
+module.exports = {UpdUser,CreateQuestion,CreateUser,CreateAnswer,getUser,getQuestion,UpdateQuestion}
