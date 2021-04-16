@@ -1,20 +1,21 @@
+const bcrypt = require('bcrypt')
 const {User,Answer,Question}= require('./database_model.js')
 
 
 async  function CreateUser (req){
+  const hashed_password = await bcrypt.hash(req.body.password,10)
+  
+  const user = new User({
+      username:req.body.username,
+      name:req.body.name,
+      surname:req.body.surname,
+      password:hashed_password,
+      email:req.body.email,
+      questings:[],
+      answers:[]  })
 
-    const user = new User({
-     username:req.body.username,
-     name:req.body.name,
-     surname:req.body.surname,
-     password:req.body.password,
-     email:req.body.email,
-     questings:[],
-     answers:[]
-    })
-
-    await user.save();
-    return 'successful sign up'
+  await user.save();
+  return 'successful sign up'    
   }
   
  
