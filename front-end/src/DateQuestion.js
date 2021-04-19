@@ -35,7 +35,6 @@ class DateQuestion extends React.Component {
     var dateTime1 = moment(this.state.startDate1).format(format);
     localStorage.setItem("todate", dateTime1);
     if (dateTime <= dateTime1) {
-      if (localStorage.getItem("value") == "vehicle") {
         const requestOptions = {
           method: 'GET',
           headers: {
@@ -43,89 +42,19 @@ class DateQuestion extends React.Component {
             'X-OBSERVATORY-AUTH': localStorage.getItem("token")
           }
         }
-        fetch('//localhost:8765/evcharge/api/SessionsPerEV/' + localStorage.getItem('VehicledataId') + '/' + localStorage.getItem("fromdate") + '/' + localStorage.getItem("todate"), requestOptions)
+        fetch('//' +  + '/' + localStorage.getItem("fromdate") + '/' + localStorage.getItem("todate"), requestOptions)
           .then((response) => {
             return response.json();
           })
           .then((data) => {
-            localStorage.setItem("NumberOfVisitedPoints", data.NumberOfVisitedPoints);
-            localStorage.setItem("TotalEnergyConsumed", data.TotalEnergyConsumed);
-            window.location = "//localhost:3000/ShowDataVehicle";
+            window.location = "//localhost:3000/DateQuestion";
           })
           .catch(error => {
-            alert("No sessions for this vehicle these days");
-            window.location = "//localhost:3000/SessionsPerVehicle";
+            alert("No data for these days");
+            window.location = "//localhost:3000/";
             console.error(error);
           })
-      }
-      if (localStorage.getItem("value") == "station") {
-        const requestOptions = {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-OBSERVATORY-AUTH': localStorage.getItem("token")
-          }
         }
-        fetch('//localhost:8765/evcharge/api/SessionsPerStation/' + localStorage.getItem('StationDataId') + '/' + localStorage.getItem("fromdate") + '/' + localStorage.getItem("todate"), requestOptions)
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            localStorage.setItem("NumberOfChargingSessions", data.NumberOfChargingSessions);
-            localStorage.setItem("TotalEnergyDelivered", data.TotalEnergyDelivered);
-            window.location = "//localhost:3000/ShowDataStation";
-          })
-          .catch(error => {
-            alert("No sessions for this station these days");
-            window.location = "//localhost:3000/SessionsPerStation";
-            console.error(error);
-          })
-      }
-      if (localStorage.getItem("value") == "point") {
-        const requestOptions = {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-OBSERVATORY-AUTH': localStorage.getItem("token")
-          }
-        }
-        fetch('//localhost:8765/evcharge/api/SessionsPerPoint/' + localStorage.getItem('PointDataId') + '/' + localStorage.getItem("fromdate") + '/' + localStorage.getItem("todate"), requestOptions)
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            localStorage.setItem("Operatortitle", " ");
-            localStorage.setItem("Operatortitle", data.PointOperator);
-            window.location = "//localhost:3000/ShowDataPoint";
-          })
-          .catch(error => {
-            alert("No sessions for this point these days");
-            window.location = "//localhost:3000/SessionsPerPoint";
-            console.error(error);
-          })
-      }
-      if (localStorage.getItem("value") == "provider") {
-        const requestOptions = {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-OBSERVATORY-AUTH': localStorage.getItem("token")
-          }
-        }
-        fetch('//localhost:8765/evcharge/api/SessionsPerProvider/' + localStorage.getItem('ProviderDataId') + '/' + localStorage.getItem("fromdate") + '/' + localStorage.getItem("todate"), requestOptions)
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            window.location = "//localhost:3000/ShowDataProvider";
-          })
-          .catch(error => {
-            alert("No sessions for this provider these days");
-            window.location = "//localhost:3000/SessionsPerProvider";
-            console.error(error);
-          })
-      }
-    }
     else {
       alert("It can not be the date From after the date To");
       window.location = "//localhost:3000/ChooseDate";
