@@ -1,0 +1,19 @@
+
+block content
+    h1 askmeanything
+    h2 sign in
+    div.text-center
+        form(class="form-signin" method="POST" action="/login")
+            #error
+                if error
+                    p.text-danger Error!!!
+            div.form-group
+              label( for="inputUsername" class="sr-only") Username
+              input(type="username" name="username" id="inputEmail" class="form-control" placeholder="username" required autofocus)
+            div.form-group
+              label(for="inputPassword" class="sr-only") Password
+              input(type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required)
+            div.form-actions
+              input.btn.btn-primary(type='submit', value='Login')
+h1= status              
+
