@@ -1,8 +1,8 @@
 const {CreateQuestion,getQuestion} = require('../Model/database_utils.js')
 
 async function validate(req, res, next){
-    const limit = await getQuestion(req.body.username,req.body.title)
-    if (limit.length !== 0) {res.status(400).send('Cannot re-ask a question')}
+    const limit = await getQuestion(req.session.username,req.body.title)
+    if (limit.length !== 0) {res.render('create_question',{status : 'cannot re-ask a question' })}
     else
       {
         next()
@@ -10,10 +10,11 @@ async function validate(req, res, next){
 }  
 
 module.exports = (app) => {
-    app.post('/question',
+    app.post('/create_question',
         validate,
-        async (req,res)=>{   
+        async (req,res)=>{  
         const ret = await CreateQuestion(req)
+        
         if (ret === 'question created'){
             res.status(200).send(ret) 
         }

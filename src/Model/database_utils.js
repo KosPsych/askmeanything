@@ -39,13 +39,14 @@ async  function getUser (username){
   }    
     
 async  function CreateQuestion (req){
+      const currentdate = new Date();
       const question = new Question({
         title:req.body.title,
         question_text:req.body.question_text,
-        keywords:req.body.keywords,
+        keywords:req.body.keywords.split(","),
         answers:[],
-        question_date:req.body.question_date,
-        username :req.body.username
+        question_date:currentdate.getDate() + "-" + currentdate.getMonth() + "-" + currentdate.getFullYear(),
+        username :req.session.username
       })
       let answered = true
       await question.save().catch(error => {

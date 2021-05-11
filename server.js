@@ -48,7 +48,21 @@ res.redirect('/')
 })
 
 app.get('/signup', (req, res) => {
-  res.render('signup',{status:''})
+  if (req.session.loggedIn){
+    res.redirect('/') 
+  }
+  else{
+    res.render('signup',{status:''})
+  }
+})
+
+app.get('/create_question', (req, res) => {
+  if (req.session.loggedIn){
+    res.render('create_question',{status : '',user :req.session.username })
+  }
+  else{
+    res.redirect('/login') 
+  }
 })
 
 app.listen(3000,()=>console.log("listening"))
