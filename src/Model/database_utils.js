@@ -39,13 +39,12 @@ async  function getUser (username){
   }    
     
 async  function CreateQuestion (req){
-      const currentdate = new Date();
+      const currentdate = new Date()
       const question = new Question({
         title:req.body.title,
         question_text:req.body.question_text,
-        keywords:req.body.keywords.split(","),
-        answers:[],
-        question_date:currentdate.getDate() + "-" + currentdate.getMonth() + "-" + currentdate.getFullYear(),
+        keywords:req.body.keywords.split(","), 
+        question_date:currentdate.getDate() + "-" + (currentdate.getMonth()+1) + "-" + currentdate.getFullYear(),
         username :req.session.username
       })
       let answered = true
@@ -76,18 +75,25 @@ async  function UpdateQuestion (question_title,name,answer_id){
 }
 
 async  function CreateAnswer (req){
+      
+      const currentdate = new Date()
       const answer = new Answer({
         answer_text:req.body.answer_text,
         question_title:req.body.question_title,
         question_user:req.body.question_user,
-        answer_date:req.body.answer_date,
-        username:req.body.username
+        answer_date:currentdate.getDate() + "-" + (currentdate.getMonth()+1) + "-" + currentdate.getFullYear(),
+        username:req.session.username
         })
       let answered = true
       const ans = await answer.save().catch(error => {
         answered=false 
       })
-      if (answered) {return ['answer created',ans._id]}
-      else {return ['cannot create answer',null]}
-    }    
-module.exports = {UpdUser,CreateQuestion,CreateUser,CreateAnswer,getUser,getQuestion,UpdateQuestion}
+      if (answered) {return 'answer created'}
+      else {return 'cannot create answer'}
+    } 
+    
+    async  function getAnswers (username,title){ 
+      const answers = await Answer.find({question_user:username,question_title:title})
+      return answers
+  }     
+module.exports = {UpdUser,CreateQuestion,CreateUser,CreateAnswer,getUser,getQuestion,UpdateQuestion,getAnswers}

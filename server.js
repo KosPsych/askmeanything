@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const app = express()
 const session = require('express-session')
 
-
+const {getQuestion,getAnswers} = require('./src/Model/database_utils.js')
 
 // Connect to DB
 const URI="mongodb+srv://dbUser:dbUser@cluster0.shluc.mongodb.net/MVCDatabase?retryWrites=true&w=majority"
@@ -63,6 +63,14 @@ app.get('/create_question', (req, res) => {
   else{
     res.redirect('/login') 
   }
+})
+
+app.get('/:question_id',async (req,res)=>
+{
+let title = req.params.question_id.replace(/-/g, " ")
+const question = await getQuestion(req.query.askedby,title)
+const answers = await getAnswers(req.query.askedby,title)
+res.render('question',{question:question[0],answers:answers})
 })
 
 app.listen(3000,()=>console.log("listening"))

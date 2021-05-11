@@ -1,0 +1,28 @@
+h1 askmeanything
+h2= question.title
+
+p= question.question_text
+
+p= "date : " +question.question_date
+p= "keywords : " +question.keywords
+
+
+h2  Answers
+
+each val in answers
+  strong= val.answer_text
+  p="answered by : "+val.username
+  p="date: "+val.answer_date
+
+
+block content    
+ h3 Answer this question 
+  div.text-center
+    form(class="form-signin" method="POST" action="/answer")
+        div.form-group
+            input(type="text" name="answer_text" id="inputAnswer" class="form-control" placeholder="write your answer.." required autofocus)
+            input(type="hidden" name="question_title" value=question.title)
+            input(type="hidden" name="question_user" value=question.username)
+        
+        div.form-actions
+            input.btn.btn-primary(type='submit', value='Submit')
