@@ -6,8 +6,15 @@ html(lang='en')
     meta(name='description', content='')
     meta(name='author', content='')
     link(rel='icon', href='/favicon.ico')
-
-    title askmeanything
+    
+    
+    
+    
+    
+    mixin login(loggedin,username)  
+     -let name = loggedin
+         
+    
 
     link(
       rel="stylesheet"
@@ -24,21 +31,33 @@ html(lang='en')
         span.navbar-toggler-icon
       #navbarsExample06.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href='#')
-              | Home 
-              span.sr-only (current)
-          li.nav-item
-            a.nav-link(href='#') Link
           
-          li.nav-item.dropdown
-            a#dropdown06.nav-link.dropdown-toggle(href='http://example.com', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Dropdown
-            .dropdown-menu(aria-labelledby='dropdown06')
-              a.dropdown-item(href='#') Action
-              a.dropdown-item(href='#') Another action
-              a.dropdown-item(href='#') Something else here
-          li.nav-item
-            a.nav-link.disabled(href='/login') Login    
+          if loggedin
+           li.nav-item
+             a.nav-link(href='/create_question') Create question
+
+          if loggedin
+           li.nav-item.dropdown
+             a#dropdown06.nav-link.dropdown-toggle(href='http://example.com', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Statistics
+             .dropdown-menu(aria-labelledby='dropdown06')
+               a.dropdown-item(href='#') keyword statistics
+               a.dropdown-item(href='#') date statistics
+
+          if loggedin  
+           li.nav-item
+             a.nav-link(href='/profile')=name
+             
+          
+          if loggedin
+            li.nav-item
+             a.nav-link.disabled(href='/logout') Logout
+                   
+          if !loggedin  
+           li.nav-item
+             a.nav-link.disabled(href='/login') Login
+           li.nav-item
+             a.nav-link.disabled(href='/signup') Sign-up   
+                   
         form.form-inline.my-2.my-md-0
           input.form-control(type='text', placeholder='Search')
      
