@@ -45,7 +45,7 @@ async  function CreateQuestion (req){
         question_text:req.body.question_text,
         keywords:req.body.keywords.split(","), 
         question_date:currentdate.getDate() + "-" + (currentdate.getMonth()+1) + "-" + currentdate.getFullYear(),
-        username :req.session.username
+        asked_by :req.session.username
       })
       let answered = true
       await question.save().catch(error => {
@@ -60,7 +60,7 @@ async  function CreateQuestion (req){
 
 async  function getQuestion (username,title){
       
-      const questions = await Question.find({username:username,title:title})
+      const questions = await Question.find({asked_by:username,title:title})
       return questions
   }  
   
@@ -82,7 +82,7 @@ async  function CreateAnswer (req){
         question_title:req.body.question_title,
         question_user:req.body.question_user,
         answer_date:currentdate.getDate() + "-" + (currentdate.getMonth()+1) + "-" + currentdate.getFullYear(),
-        username:req.session.username
+        answered_by:req.session.username
         })
       let answered = true
       const ans = await answer.save().catch(error => {

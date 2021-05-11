@@ -31,7 +31,9 @@ require('./src/Controllers/signin_controller')(app)
 require('./src/Controllers/create_question_controller')(app)
 require('./src/Controllers/create_answer_controller')(app)
 
-// direct access to model or plain html
+
+//direct access to model or plain html pages , get requests
+
 app.get('/login', (req, res) => {
   res.render('login',{status:''})
 })
@@ -39,7 +41,6 @@ app.get('/login', (req, res) => {
 app.get('/', (req, res) => {
   res.render('home',{name :req.session.username})
 })
-
 
 app.get('/logout',(req,res)=>
 {
@@ -65,12 +66,12 @@ app.get('/create_question', (req, res) => {
   }
 })
 
-app.get('/:question_id',async (req,res)=>
+app.get('/question_view/:question_id',async (req,res)=>
 {
-let title = req.params.question_id.replace(/-/g, " ")
-const question = await getQuestion(req.query.askedby,title)
-const answers = await getAnswers(req.query.askedby,title)
-res.render('question',{question:question[0],answers:answers})
+  let title = req.params.question_id.replace(/-/g, " ")
+  const question = await getQuestion(req.query.askedby,title)
+  const answers = await getAnswers(req.query.askedby,title)
+  res.render('question',{question:question[0],answers:answers})
 })
 
 app.listen(3000,()=>console.log("listening"))
