@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
-
+const session = require('express-session')
 
 
 
@@ -14,6 +14,10 @@ const connectDB = async ()=>{
 
 connectDB()
 
+app.use(session({secret:'Keep it secret'
+,name:'session_id'
+,resave: true
+,saveUninitialized:false}))
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -33,10 +37,19 @@ app.get('/login', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  res.render('home',{status:''})
+  res.render('home',{name :req.session.username})
 })
 
 
+app.get('/logout',(req,res)=>
+{
+req.session.destroy((err)=>{})
+res.redirect('/') 
+})
+
+app.get('/signup', (req, res) => {
+  res.render('signup',{status:''})
+})
 
 app.listen(3000,()=>console.log("listening"))
 

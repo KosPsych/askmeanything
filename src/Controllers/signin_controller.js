@@ -2,13 +2,12 @@ const {getUser} = require('../Model/database_utils.js')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
-const secretToken = "very secure secret"
+
 
 
                               
-async function authorization(req, res, next){
+async function authentication(req, res, next){
     const user = await getUser(req.body.username)
-    console.log(user)
     if (user.length == 0) {res.render('login',{status:'incorrect username'}) }
     else
       {
@@ -19,13 +18,15 @@ async function authorization(req, res, next){
       }   
 }  
 
-
+ 
 
 module.exports = (app) => {
   app.post('/login',
-  authorization,
+  authentication,
   async (req,res)=>{
+    req.session.loggedIn=true
+    req.session.username = req.body.username
     res.redirect('/')
-    //res.status(200).send({ user_access_token: jwt.sign({user:req.body.username},secretToken , {expiresIn:3600}) })     
+      
   })
 }
