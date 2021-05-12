@@ -59,9 +59,19 @@ async  function CreateQuestion (req){
     }   
 
 async  function getQuestion (username,title){
+
+      if (title) {
+        console.log("a")
+        const questions = await Question.find({asked_by:username,title:title})
+        return questions
+      }
+      else{
+        const questions = await Question.find({asked_by:username})
+        return questions
+
+      }
       
-      const questions = await Question.find({asked_by:username,title:title})
-      return questions
+      
   }  
   
 async  function UpdateQuestion (question_title,name,answer_id){
@@ -93,7 +103,14 @@ async  function CreateAnswer (req){
     } 
     
     async  function getAnswers (username,title){ 
-      const answers = await Answer.find({question_user:username,question_title:title})
-      return answers
+      if (title){
+        const answers = await Answer.find({answered_by:username,question_title:title})
+        return answers
+      }
+      else{
+        const answers = await Answer.find({answered_by:username})
+        return answers
+      }
+      
   }     
 module.exports = {UpdUser,CreateQuestion,CreateUser,CreateAnswer,getUser,getQuestion,UpdateQuestion,getAnswers}

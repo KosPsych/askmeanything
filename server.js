@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const app = express()
 const session = require('express-session')
 
-const {getQuestion,getAnswers} = require('./src/Model/database_utils.js')
+const {getQuestion,getAnswers,getUser} = require('./src/Model/database_utils.js')
 
 // Connect to DB
 const URI="mongodb+srv://dbUser:dbUser@cluster0.shluc.mongodb.net/MVCDatabase?retryWrites=true&w=majority"
@@ -59,7 +59,6 @@ app.get('/signup', (req, res) => {
 
 app.get('/create_question', (req, res) => {
   if (req.session.loggedIn){
-    console.log(req.session)
     res.render('create_question',{status : '',name :req.session.username , loggedin : req.session.loggedIn})
   }
   else{
@@ -74,6 +73,14 @@ app.get('/question_view/:question_id', async (req,res)=>
   const answers = await getAnswers(req.query.askedby,title)
   res.render('question',{question:question[0],answers:answers,name :req.session.username , loggedin : req.session.loggedIn})
 })
+
+app.get('/profile', async (req, res) => {
+  const questions = await getQuestion(req.session.username)
+  const answers = await getAnswers(req.session.username)
+  const user = await getUser(req.session.username)
+  res.render('profile',{questions :questions, answers : answers,user:user[0],name :req.session.username , loggedin : req.session.loggedIn})
+})
+
 
 app.listen(3000,()=>console.log("listening"))
 
