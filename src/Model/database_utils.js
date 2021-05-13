@@ -59,9 +59,13 @@ async  function CreateQuestion (req){
     }   
 
 async  function getQuestion (username,title){
+   
+      if (!title && !username){
+        const questions = await Question.find()
+        return questions
+      }  
 
       if (title) {
-        console.log("a")
         const questions = await Question.find({asked_by:username,title:title})
         return questions
       }

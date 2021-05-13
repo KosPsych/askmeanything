@@ -4,7 +4,7 @@ const app = express()
 const session = require('express-session')
 
 const {getQuestion,getAnswers,getUser} = require('./src/Model/database_utils.js')
-
+const {Statistics} = require('./src/utils.js')
 // Connect to DB
 const URI="mongodb+srv://dbUser:dbUser@cluster0.shluc.mongodb.net/MVCDatabase?retryWrites=true&w=majority"
 const connectDB = async ()=>{
@@ -81,6 +81,21 @@ app.get('/profile', async (req, res) => {
   res.render('profile',{questions :questions, answers : answers,user:user[0],name :req.session.username , loggedin : req.session.loggedIn})
 })
 
+app.get('/statistics', async (req, res) => {
+  if (req.session.loggedIn){
+  const questions = await getQuestion()
+  result= Statistics(questions)
+  res.render('charts',{keys:result.keys,
+                        values:result.values,
+                        name :req.session.username,
+                        loggedin : req.session.loggedIn,
+                        question_keys:result.question_keys,
+                        question_values:result.question_values})
+}
+else{
+  res.redirect('/login')
+}
+})
 
 app.listen(3000,()=>console.log("listening"))
 

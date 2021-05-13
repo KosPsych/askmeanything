@@ -37,11 +37,8 @@ html(lang='en')
              a.nav-link(href='/create_question') Create question
 
           if loggedin
-           li.nav-item.dropdown
-             a#dropdown06.nav-link.dropdown-toggle(href='http://example.com', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Statistics
-             .dropdown-menu(aria-labelledby='dropdown06')
-               a.dropdown-item(href='#') keyword statistics
-               a.dropdown-item(href='#') date statistics
+           li.nav-item
+             a.nav-link(href='/statistics') Statistics
 
           if loggedin  
            li.nav-item
@@ -50,13 +47,13 @@ html(lang='en')
           
           if loggedin
             li.nav-item
-             a.nav-link.disabled(href='/logout') Logout
+             a.nav-link(href='/logout') Logout
                    
           if !loggedin  
            li.nav-item
-             a.nav-link.disabled(href='/login') Login
+             a.nav-link(href='/login') Login
            li.nav-item
-             a.nav-link.disabled(href='/signup') Sign-up   
+             a.nav-link(href='/signup') Sign-up   
                    
         form.form-inline.my-2.my-md-0
           input.form-control(type='text', placeholder='Search')
