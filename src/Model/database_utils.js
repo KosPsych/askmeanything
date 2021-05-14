@@ -38,13 +38,13 @@ async  function getUser (username){
   }    
     
 async  function CreateQuestion (req){
+      const currentdate = new Date()
       const question = new Question({
         title:req.body.title,
         question_text:req.body.question_text,
-        keywords:req.body.keywords,
-        answers:[],
-        question_date:req.body.question_date,
-        username :req.body.username
+        keywords:req.body.keywords.split(","), 
+        question_date:currentdate.getDate() + "-" + (currentdate.getMonth()+1) + "-" + currentdate.getFullYear(),
+        asked_by :req.session.username
       })
       let answered = true
       await question.save().catch(error => {
@@ -58,21 +58,35 @@ async  function CreateQuestion (req){
     }   
 
 async  function getQuestion (username,title){
+   
+      if (!title && !username){
+        const questions = await Question.find()
+        return questions
+      }  
 
-      const questions = await Question.find({username:username,title:title})
-      return questions
-  }
+      if (title) {
+        const questions = await Question.find({asked_by:username,title:title})
+        return questions
+      }
+      else{
+        const questions = await Question.find({asked_by:username})
+        return questions
 
-async function getQuestionByKeyword (foo) {
-    const questions = await Question.find({keywords: foo})
-    console.log(questions)
-    let empty = false
-    if (questions.length <=0)
-        empty = true
-    if (empty) return "No Results Found"
-    else return questions
-}
+      }
+      
+      
+  }  
   
+async function getQuestionByKeyword (foo) {
+  const questions = await Question.find({keywords: foo})
+  console.log(questions)
+  let empty = false
+  if (questions.length <=0)
+      empty = true
+  if (empty) return "No Results Found"
+  else return questions
+}
+
 async  function UpdateQuestion (question_title,name,answer_id){
     const x = await Question.updateOne(
      { title: question_title, username:name },
@@ -84,20 +98,32 @@ async  function UpdateQuestion (question_title,name,answer_id){
 }
 
 async  function CreateAnswer (req){
+      
+      const currentdate = new Date()
       const answer = new Answer({
         answer_text:req.body.answer_text,
         question_title:req.body.question_title,
         question_user:req.body.question_user,
-        answer_date:req.body.answer_date,
-        username:req.body.username
+        answer_date:currentdate.getDate() + "-" + (currentdate.getMonth()+1) + "-" + currentdate.getFullYear(),
+        answered_by:req.session.username
         })
       let answered = true
       const ans = await answer.save().catch(error => {
         answered=false 
       })
-      if (answered) {return ['answer created',ans._id]}
-      else {return ['cannot create answer',null]}
-    }
-
-
-module.exports = {UpdUser,CreateQuestion,CreateUser,CreateAnswer,getUser,getQuestion,UpdateQuestion,getQuestionByKeyword}
+      if (answered) {return 'answer created'}
+      else {return 'cannot create answer'}
+    } 
+    
+    async  function getAnswers (username,title){ 
+      if (title){
+        const answers = await Answer.find({answered_by:username,question_title:title})
+        return answers
+      }
+      else{
+        const answers = await Answer.find({answered_by:username})
+        return answers
+      }
+      
+  }     
+module.exports = {UpdUser,CreateQuestion,CreateUser,CreateAnswer,getUser,getQuestion,UpdateQuestion,getAnswers, getQuestionByKeyword}

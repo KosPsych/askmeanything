@@ -1,0 +1,23 @@
+include navbar.pug
++login(loggedin,name)
+block content
+    h1 askmeanything
+    h2 create a question
+    div.text-center
+        form(class="form-signin" method="POST" action="/create_question")
+
+            div.form-group
+              label( for="inputTitle" class="sr-only") Title
+              input(type="text" name="title" id="inputTitle" class="form-control" placeholder="title.." required autofocus)
+
+            div.form-group
+              label(for="inputQuestion" class="sr-only") Question
+              input(type="text" name="question_text" id="inputQuestion" class="form-control" placeholder="question body.." required)
+
+            div.form-group
+              label(for="inputkeywords" class="sr-only") Keywords
+              input(type="text" name="keywords" id="inputkeywords" class="form-control" placeholder="keywords separated by comma.." required)
+
+            div.form-actions
+              input.btn.btn-primary(type='submit', value='Create')
+h1= status      

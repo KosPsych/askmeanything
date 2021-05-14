@@ -1,7 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
+const session = require('express-session')
 
+const {getQuestion,getAnswers,getUser} = require('./src/Model/database_utils.js')
+const {Statistics} = require('./src/utils.js')
 // Connect to DB
 const URI="mongodb+srv://dbUser:dbUser@cluster0.shluc.mongodb.net/MVCDatabase?retryWrites=true&w=majority"
 const connectDB = async ()=>{
@@ -10,7 +13,11 @@ const connectDB = async ()=>{
 }
 
 connectDB()
-console.log("not connected")
+
+app.use(session({secret:'Keep it secret'
+,name:'session_id'
+,resave: true
+,saveUninitialized:false}))
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +30,6 @@ require('./src/Controllers/signup_controller')(app)
 require('./src/Controllers/signin_controller')(app)
 require('./src/Controllers/create_question_controller')(app)
 require('./src/Controllers/create_answer_controller')(app)
-
 require('./src/Controllers/search_by_keyword')(app)
 
 
@@ -33,7 +39,62 @@ app.get('/login', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  res.render('home',{status:''})
+  res.render('home',{name :req.session.username, loggedin : req.session.loggedIn})
+})
+
+app.get('/logout',(req,res)=>
+{
+req.session.destroy((err)=>{})
+res.redirect('/') 
+})
+
+app.get('/signup', (req, res) => {
+  if (req.session.loggedIn){
+    res.redirect('/') 
+  }
+  else{
+    res.render('signup',{status:''})
+  }
+})
+
+app.get('/create_question', (req, res) => {
+  if (req.session.loggedIn){
+    res.render('create_question',{status : '',name :req.session.username , loggedin : req.session.loggedIn})
+  }
+  else{
+    res.redirect('/login') 
+  }
+})
+
+app.get('/question_view/:question_id', async (req,res)=>
+{
+  let title = req.params.question_id.replace(/-/g, " ")
+  const question = await getQuestion(req.query.askedby,title)
+  const answers = await getAnswers(req.query.askedby,title)
+  res.render('question',{question:question[0],answers:answers,name :req.session.username , loggedin : req.session.loggedIn})
+})
+
+app.get('/profile', async (req, res) => {
+  const questions = await getQuestion(req.session.username)
+  const answers = await getAnswers(req.session.username)
+  const user = await getUser(req.session.username)
+  res.render('profile',{questions :questions, answers : answers,user:user[0],name :req.session.username , loggedin : req.session.loggedIn})
+})
+
+app.get('/statistics', async (req, res) => {
+  if (req.session.loggedIn){
+  const questions = await getQuestion()
+  result= Statistics(questions)
+  res.render('charts',{keys:result.keys,
+                        values:result.values,
+                        name :req.session.username,
+                        loggedin : req.session.loggedIn,
+                        question_keys:result.question_keys,
+                        question_values:result.question_values})
+}
+else{
+  res.redirect('/login')
+}
 })
 
 app.listen(3000,()=>console.log("listening"))

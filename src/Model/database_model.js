@@ -7,9 +7,6 @@ const UserSchema = new mongoose.Schema({
     username:String,
     password:String,
     email:String,
-    questings:Array,
-    answers:Array
-  
   })
 
 const QuestionSchema = new mongoose.Schema({
@@ -18,7 +15,7 @@ const QuestionSchema = new mongoose.Schema({
     keywords : Array,
     answers : Array,
     question_date : String,
-    username : String
+    asked_by : String
   })
 
 const AnswerSchema = new mongoose.Schema({
@@ -26,7 +23,7 @@ const AnswerSchema = new mongoose.Schema({
     question_title:String,
     question_user:String,
     answer_date:String,
-    username:String
+    answered_by:String
   })
 
 

@@ -4,7 +4,8 @@ module.exports = (app) => {
     app.post('/signup',async (req,res)=>{
   
         const exists = await getUser(req.body.username)
-        if (exists.length == 1) {res.status(402).send('username already exists')} 
+        console.log(req.body.username)
+        if (exists.length == 1) {res.render('signup',{status:'username already exists'}) } 
         else
         {
           const ret = await CreateUser(req)  

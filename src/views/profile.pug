@@ -1,0 +1,26 @@
+h1 Askmeanything
+include navbar.pug
++login(loggedin,name)
+
+h2 My information
+
+p= "first name : "+user.name
+p= "last name : "+user.surname
+p= "email : "+user.email
+
+h2 Questions Asked 
+
+each val in questions
+  a(href='http://localhost:3000/question_view/'+val.title+"?askedby="+val.asked_by) !{val.title} 
+  p="date : "+val.question_date
+
+
+h2 My Answers
+
+each val in answers
+  a(href='http://localhost:3000/question_view/'+val.question_title+"?askedby="+val.question_user) !{val.question_title} 
+  p="date : "+val.answer_date
+  
+
+
+  
