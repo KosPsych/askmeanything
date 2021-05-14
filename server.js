@@ -2,9 +2,6 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 
-
-
-
 // Connect to DB
 const URI="mongodb+srv://dbUser:dbUser@cluster0.shluc.mongodb.net/MVCDatabase?retryWrites=true&w=majority"
 const connectDB = async ()=>{
@@ -13,7 +10,7 @@ const connectDB = async ()=>{
 }
 
 connectDB()
-
+console.log("not connected")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,6 +24,9 @@ require('./src/Controllers/signin_controller')(app)
 require('./src/Controllers/create_question_controller')(app)
 require('./src/Controllers/create_answer_controller')(app)
 
+require('./src/Controllers/search_by_keyword')(app)
+
+
 // direct access to model or plain html
 app.get('/login', (req, res) => {
   res.render('login',{status:''})
@@ -35,8 +35,6 @@ app.get('/login', (req, res) => {
 app.get('/', (req, res) => {
   res.render('home',{status:''})
 })
-
-
 
 app.listen(3000,()=>console.log("listening"))
 

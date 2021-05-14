@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt')
 const {User,Answer,Question}= require('./database_model.js')
 
-
 async  function CreateUser (req){
 
   const hashed_password = await bcrypt.hash(req.body.password,10)
@@ -19,9 +18,9 @@ async  function CreateUser (req){
     answered=false 
   })
   if (answered) {return 'successful sign up'}
-  else {return 'unsuccessful in sign up'}    
+  else {return 'unsuccessful in sign up'}
   }
-  
+
  
   
 async  function UpdUser (){
@@ -59,10 +58,20 @@ async  function CreateQuestion (req){
     }   
 
 async  function getQuestion (username,title){
-      
+
       const questions = await Question.find({username:username,title:title})
       return questions
-  }  
+  }
+
+async function getQuestionByKeyword (foo) {
+    const questions = await Question.find({keywords: foo})
+    console.log(questions)
+    let empty = false
+    if (questions.length <=0)
+        empty = true
+    if (empty) return "No Results Found"
+    else return questions
+}
   
 async  function UpdateQuestion (question_title,name,answer_id){
     const x = await Question.updateOne(
@@ -88,5 +97,7 @@ async  function CreateAnswer (req){
       })
       if (answered) {return ['answer created',ans._id]}
       else {return ['cannot create answer',null]}
-    }    
-module.exports = {UpdUser,CreateQuestion,CreateUser,CreateAnswer,getUser,getQuestion,UpdateQuestion}
+    }
+
+
+module.exports = {UpdUser,CreateQuestion,CreateUser,CreateAnswer,getUser,getQuestion,UpdateQuestion,getQuestionByKeyword}
