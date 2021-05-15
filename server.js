@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const app = express()
 const session = require('express-session')
 
+
+
 const {getQuestion,getAnswers,getUser} = require('./src/Model/database_utils.js')
 const {Statistics} = require('./src/utils.js')
 // Connect to DB
@@ -68,10 +70,16 @@ app.get('/create_question', (req, res) => {
 
 app.get('/question_view/:question_id', async (req,res)=>
 {
-  let title = req.params.question_id.replace(/-/g, " ")
-  const question = await getQuestion(req.query.askedby,title)
-  const answers = await getAnswers(req.query.askedby,title)
+  let url = req.url
+  let asked_by = url.slice(url.lastIndexOf('?')+9)
+  let whole = url.slice(url.lastIndexOf('/')+1)
+  let title = whole.replace(url.slice(url.lastIndexOf('?')), '').replace("-", " ")
+
+  
+  const question = await getQuestion(asked_by,title)
+  const answers = await getAnswers(asked_by,title)
   res.render('question',{question:question[0],answers:answers,name :req.session.username , loggedin : req.session.loggedIn})
+  
 })
 
 app.get('/profile', async (req, res) => {

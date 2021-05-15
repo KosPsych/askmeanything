@@ -10,15 +10,16 @@ p= "email : "+user.email
 
 h2 Questions Asked 
 
+
 each val in questions
-  a(href='http://localhost:3000/question_view/'+val.title+"?askedby="+val.asked_by) !{val.title} 
+  a(href='http://localhost:3000/question_view/'+val.title.replace(" ", "-")+"?askedby="+val.asked_by) !{val.title} 
   p="date : "+val.question_date
 
 
 h2 My Answers
 
 each val in answers
-  a(href='http://localhost:3000/question_view/'+val.question_title+"?askedby="+val.question_user) !{val.question_title} 
+  a(href='http://localhost:3000/question_view/'+val.question_title.replace(" ", "-")+"?askedby="+val.question_user) !{val.question_title} 
   p="date : "+val.answer_date
   
 
