@@ -1,0 +1,58 @@
+.logo-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;
+    cursor: pointer;
+}
+
+.div-title {
+    position: relative;
+    top: 100px;
+    width: 50%;
+    padding: 10px;
+    margin: auto;
+    border: 2px solid black;
+    float: center;
+    text-align: center;
+    background-color: #6EBFC2;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .div-alt {
+    position: relative;
+    top: 180px;
+    width: 50%;
+    padding: 10px;
+    margin: auto;
+    float: center;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+
+  }
+
+  .text-center {
+    position: relative;
+    top: 150px;
+    width: 50%;
+    padding: 10px;
+    margin: auto;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.form-control {
+    padding: 10px;
+    margin: auto;
+}
+
+.btn.btn-primary {
+    cursor: pointer;
+}
+
+.btn.btn-primary:hover {
+    opacity: 0.8;
+  }
+
+
+  

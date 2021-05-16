@@ -1,29 +1,32 @@
-
+img(src='logo.png' alt='Logo' class='logo-image' onclick="window.location.replace('/')" )
 block content
-    h1 askmeanything
-    h2 sign up
+    div.div-title Create a new AskMeAnything account!
     div.text-center
         form(class="form-signin" method="POST" action="/signup")
+            
             div.form-group
               label( for="inputUsername" class="sr-only") Name
-              input(type="name" name="name" id="inputname" class="form-control" placeholder="name..." required autofocus)
+              input(type="name" name="name" id="inputname" class="form-control" placeholder="Name" required autofocus)
             
             div.form-group
               label( for="inputUsername" class="sr-only") Surname
-              input(type="surname" name="surname" id="inputsurname" class="form-control" placeholder="surname..." required autofocus)
+              input(type="surname" name="surname" id="inputsurname" class="form-control" placeholder="Surname" required autofocus)
 
             div.form-group
               label( for="inputUsername" class="sr-only") Username
-              input(type="username" name="username" id="inputUsername" class="form-control" placeholder="username..." required autofocus)
+              input(type="username" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus)
 
             div.form-group
               label(for="inputPassword" class="sr-only") E-mail
-              input(type="email" name="email" id="inputemail" class="form-control" placeholder="e-mail..." required)  
+              input(type="email" name="email" id="inputemail" class="form-control" placeholder="E-mail" required)  
 
             div.form-group
               label(for="inputPassword" class="sr-only") Password
-              input(type="password" name="password" id="inputPassword" class="form-control" placeholder="Password..." required)
-
+              input(type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required)
+              
             div.form-actions
               input.btn.btn-primary(type='submit', value='Sign up')
+              input.btn.btn-cancel(class="button" type="button" onclick="window.location.replace('/')" value="Cancel") 
 h1= status      
+
+link(rel='stylesheet', href='/signup.css', type='text/css')

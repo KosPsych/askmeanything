@@ -6,15 +6,9 @@ html(lang='en')
     meta(name='description', content='')
     meta(name='author', content='')
     link(rel='icon', href='/favicon.ico')
-    
-    
-    
-    
-    
+
     mixin login(loggedin,username)  
      -let name = loggedin
-         
-    
 
     link(
       rel="stylesheet"
@@ -22,38 +16,23 @@ html(lang='en')
       integrity="sha256-NJWeQ+bs82iAeoT5Ktmqbi3NXwxcHlfaVejzJI2dklU="
       crossorigin="anonymous"
     )
-    link(href='/navbar.css', rel='stylesheet')
+    
 
   body
-    nav.navbar.navbar-expand-xl.navbar-dark.bg-dark
-      a.navbar-brand(href='/') Home
-      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExample06', aria-controls='navbarsExample06', aria-expanded='false', aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-      #navbarsExample06.collapse.navbar-collapse
+    nav(class='navbar navbar-expand-xl navbar-light' style={background:'#6EBFC2',position: 'fixed',bottom: '0'})
+      
         ul.navbar-nav.mr-auto
-          
-          if loggedin
-           li.nav-item
-             a.nav-link(href='/create_question') Create question
-
-          if loggedin
-           li.nav-item
-             a.nav-link(href='/statistics') Statistics
-
-          if loggedin  
-           li.nav-item
-             a.nav-link(href='/profile')=name
-             
-          
-          if loggedin
-            li.nav-item
-             a.nav-link(href='/logout') Logout
                    
-          if !loggedin  
-           li.nav-item
-             a.nav-link(href='/login') Login
-           li.nav-item
-             a.nav-link(href='/signup') Sign-up   
+           li.nav-item 
+             a.nav-link(href='/about') About
+           li.nav-item 
+             a.nav-link(href='/contact') Contact Us
+           li.nav-item 
+             a.nav-link(href='https://github.com/KosPsych/askmeanything/tree/main/documentation') Project Documentation 
+           li.nav-item 
+             a.nav-link(href='https://github.com/KosPsych/askmeanything') Link on Github   
+           li.nav-item 
+             a.nav-link(href='https://courses.pclab.ece.ntua.gr/course/view.php?id=34') Course Materials
                    
         form.form-inline.my-2.my-md-0
           input.form-control(type='text', placeholder='Search')
@@ -69,3 +48,5 @@ html(lang='en')
       integrity="sha256-DiWJXXyq81WlPRnDfGmgYZj2aOVCKyEdJ1l+2TmDuAs="
       crossorigin="anonymous"
     )
+
+    link(rel='stylesheet', href='/navbar.css', type='text/css')

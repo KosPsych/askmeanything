@@ -2,6 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 const session = require('express-session')
+const path = require('path');
+const fetch = require("node-fetch");
 
 const {getQuestion,getAnswers,getUser} = require('./src/Model/database_utils.js')
 const {Statistics} = require('./src/utils.js')
@@ -23,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine','pug')
 app.set('views','./src/views')
-
+app.use(express.static('public'))
 
 //Controllers , post requests
 require('./src/Controllers/signup_controller')(app)
@@ -82,7 +84,7 @@ app.get('/profile', async (req, res) => {
 })
 
 app.get('/statistics', async (req, res) => {
-  if (req.session.loggedIn){
+
   const questions = await getQuestion()
   result= Statistics(questions)
   res.render('charts',{keys:result.keys,
@@ -91,10 +93,8 @@ app.get('/statistics', async (req, res) => {
                         loggedin : req.session.loggedIn,
                         question_keys:result.question_keys,
                         question_values:result.question_values})
-}
-else{
-  res.redirect('/login')
-}
+
+
 })
 
 app.listen(3000,()=>console.log("listening"))

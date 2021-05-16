@@ -1,26 +1,31 @@
-h1 Askmeanything
+img(src='logo.png' alt='Logo' class='logo-image' onclick="window.location.replace('/')")
+
+mixin login(loggedin,username)  
+     -let name = loggedin
+
+div.upper-div
+  div.div-title Click on a question title to see more!
+  div.usr
+    h3="You are logged in as: "+name
+    p= "First Name: "+user.name
+    p= "Last Name: "+user.surname
+    p= "E-mail: "+user.email
+
+h2 Questions Asked by You
+
+div.questions-class
+  each val in questions
+    a(href='http://localhost:3000/question_view/'+val.title.replace(" ", "-")+"?askedby="+val.asked_by) Question Title: !{val.title} 
+    p="Date Asked: "+val.question_date
+
+h2 Your Answers
+
+div.answers-class 
+  each val in answers
+    a(href='http://localhost:3000/question_view/'+val.question_title.replace(" ", "-")+"?askedby="+val.question_user) !{val.question_title} 
+    p="date : "+val.answer_date
+  
 include navbar.pug
 +login(loggedin,name)
 
-h2 My information
-
-p= "first name : "+user.name
-p= "last name : "+user.surname
-p= "email : "+user.email
-
-h2 Questions Asked 
-
-each val in questions
-  a(href='http://localhost:3000/question_view/'+val.title+"?askedby="+val.asked_by) !{val.title} 
-  p="date : "+val.question_date
-
-
-h2 My Answers
-
-each val in answers
-  a(href='http://localhost:3000/question_view/'+val.question_title+"?askedby="+val.question_user) !{val.question_title} 
-  p="date : "+val.answer_date
-  
-
-
-  
+link(rel='stylesheet', href='/profile.css', type='text/css')

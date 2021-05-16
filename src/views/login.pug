@@ -1,16 +1,18 @@
-
+img(src='logo.png' alt='Logo' class='logo-image' onclick="window.location.replace('/')")
 block content
-    h1 askmeanything
-    h2 sign in
+    div.div-title Login to your AskMeAnything account!
     div.text-center
         form(class="form-signin" method="POST" action="/login")
             div.form-group
-              label( for="inputUsername" class="sr-only") Username
-              input(type="username" name="username" id="inputEmail" class="form-control" placeholder="username" required autofocus)
+              label( for="inputUsername" class="sr-only") Username: 
+              input(type="username" name="username" id="inputEmail" class="form-control" required autofocus)
+            br
             div.form-group
-              label(for="inputPassword" class="sr-only") Password
-              input(type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required)
+              label(for="inputPassword" class="sr-only") Password: 
+              input(type="password" name="password" id="inputPassword" class="form-control" required)
+            br
             div.form-actions
               input.btn.btn-primary(type='submit', value='Login')
-h1= status              
 
+div.div-alt Don't have an account? Click <a href="/signup">here</a> to sign up instead!
+link(rel='stylesheet', href='/login.css', type='text/css')

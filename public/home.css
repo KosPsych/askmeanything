@@ -1,0 +1,49 @@
+.logo-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
+  cursor: pointer;
+}
+
+h1 {
+  color: #BF4040;
+  padding: 10px;
+  margin: 20px;
+  }
+
+.div-class {
+  width: 1000px;
+  margin: auto;
+  border: 2px solid black;
+  padding: 10px;
+  margin: 20px;
+  display: inline-block;
+  background-color: #6EBFC2;
+}
+
+.btn-class {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.login-btn {
+  float: right;
+  border: 2px solid black;
+  padding: 10px;
+  margin: 20px;
+  color: black;
+}
+
+.utils-btn {
+  border: 2px solid black;
+  padding: 10px;
+  margin: 20px;
+  color: #BF4040;
+  float: center;
+  text-align: center;
+}
+
+
+
