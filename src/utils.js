@@ -40,14 +40,22 @@ function Statistics (questions){
     let question_keys=['today',"last 7 days","last 30 days","total"]
     let question_values = [dict_2['today'],dict_2["last 7 days"],dict_2["last 30 days"],dict_2['total']]
     
-  
+    var items = Object.keys(dict).map(function(key) {
+      return [key, dict[key]];
+    });
     
+    items.sort(function(first, second) {
+      return second[1] - first[1];
+    });
+    dict = items.slice(0, 5)
     let keys=[]
     let values=[]
-    for(var key in dict) {
-      keys.push(key)
-      values.push(dict[key])
+    for (let i=0; i<dict.length; i++){
+       keys.push(dict[i][0])
+       values.push(dict[i][1])
+       
     }
+    
     return {keys,values,question_keys,question_values}
 }
 

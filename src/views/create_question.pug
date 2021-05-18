@@ -1,8 +1,5 @@
 img(src='logo.png' alt='Logo' class='logo-image' onclick="window.location.replace('/')")
 
-mixin login(loggedin,username)  
-     -let name = loggedin
-
 div.upper-div
   div.div-title Ask a new question!
   div.usr
@@ -11,7 +8,7 @@ div.upper-div
 
 div.ask Ask a question and wait for the answers!
 
-+login(loggedin, name)
+
 block content
     
     div.text-center

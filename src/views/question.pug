@@ -1,8 +1,6 @@
 div.div-title Answer the question below!
 h1 askmeanything
 
-include navbar.pug
-+login(loggedin,name)
 
 div.answer-body
 
@@ -12,19 +10,28 @@ div.answer-body
     p= "Date Asked: " +question.question_date
     p= "Keywords: " +question.keywords
     p= "Asked by: " +question.asked_by
+    if  question.__v == 0 && question.asked_by == name
+      form(method="GET" action="/edit_question")
+       input(type="hidden" name="question_title" value=question.title)
+       input(type="hidden" name="asked_by" value=question.asked_by)
+       input.btn(type='submit', value='Edit')
+    
 
   div.answer-group
     h2  Answers
+    if answers.length == 0
+      p="no answers yet"
     each val in answers
       p= " "+val.answer_text
       p="Answered by : "+val.answered_by
       p="Date Answered: "+val.answer_date
 
-
-  block content    
-  h3(style={margin:"80px"}) Answer this question 
+  if loggedin
+   block content    
+   h3(style={margin:"80px"}) Answer this question 
     div.text-center
-      form(class="form-signin" method="POST" action="/answer")
+      
+    form(class="form-signin" method="POST" action="/answer")
           div.form-group
               input(type="text" name="answer_text" id="inputAnswer" class="form-control" placeholder="Write your answer here" required autofocus)
               input(type="hidden" name="question_title" value=question.title)
@@ -32,6 +39,6 @@ div.answer-body
           
           div.form-actions
               input.btn(type='submit', value='Submit')
-              input.btn.btn-cancel(class="button" type="button" onclick="window.location.replace('/')" value="Cancel")
+              
 
 link(rel='stylesheet', href='/question.css', type='text/css')

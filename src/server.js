@@ -7,8 +7,8 @@ const fetch = require("node-fetch");
 
 
 
-const {getQuestion,getAnswers,getUser} = require('./src/Model/database_utils.js')
-const {Statistics} = require('./src/utils.js')
+const {getQuestion,getAnswers,getUser} = require('./Model/database_utils.js')
+const {Statistics} = require('./utils.js')
 // Connect to DB
 const URI="mongodb+srv://dbUser:dbUser@cluster0.shluc.mongodb.net/MVCDatabase?retryWrites=true&w=majority"
 const connectDB = async ()=>{
@@ -26,15 +26,16 @@ app.use(session({secret:'Keep it secret'
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine','pug')
-app.set('views','./src/views')
+app.set('views','./views')
 app.use(express.static('public'))
 
 //Controllers , post requests
-require('./src/Controllers/signup_controller')(app)
-require('./src/Controllers/signin_controller')(app)
-require('./src/Controllers/create_question_controller')(app)
-require('./src/Controllers/create_answer_controller')(app)
-require('./src/Controllers/search_by_keyword')(app)
+require('./Controllers/signup_controller')(app)
+require('./Controllers/signin_controller')(app)
+require('./Controllers/create_question_controller')(app)
+require('./Controllers/create_answer_controller')(app)
+require('./Controllers/search_by_keyword')(app)
+require('./Controllers/edit_question_controller')(app)
 
 
 // direct access to model or plain html
@@ -43,7 +44,7 @@ app.get('/login', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  res.render('home',{name :req.session.username, loggedin : req.session.loggedIn})
+  res.render('home',{name :req.session.username ,loggedin : req.session.loggedIn})
 })
 
 app.get('/logout',(req,res)=>
@@ -63,7 +64,7 @@ app.get('/signup', (req, res) => {
 
 app.get('/create_question', (req, res) => {
   if (req.session.loggedIn){
-    res.render('create_question',{status : '',name :req.session.username , loggedin : req.session.loggedIn})
+    res.render('create_question',{status : '',name :req.session.username })
   }
   else{
     res.redirect('/login') 
@@ -80,15 +81,38 @@ app.get('/question_view/:question_id', async (req,res)=>
   
   const question = await getQuestion(asked_by,title)
   const answers = await getAnswers(asked_by,title)
-  res.render('question',{question:question[0],answers:answers,name :req.session.username , loggedin : req.session.loggedIn})
+  res.render('question',{question:question[0],answers:answers,name :req.session.username })
   
 })
 
+app.get('/edit_question', async (req,res)=>{
+  if (req.session.loggedIn){
+       if (req.query.asked_by && req.query.question_title ){
+          const question = await getQuestion(req.query.asked_by,req.query.question_title)
+          const question_body = question[0].question_text
+          const keywords = question[0].keywords.join()
+          res.render('edit_question',{question_body:question_body,keywords :keywords ,name :req.session.username,title : question[0].title })
+         }
+       else{
+        res.redirect('/') 
+       }
+  }
+  else{
+       res.redirect('/login') 
+  }
+  
+      })
+
 app.get('/profile', async (req, res) => {
-  const questions = await getQuestion(req.session.username)
-  const answers = await getAnswers(req.session.username)
-  const user = await getUser(req.session.username)
-  res.render('profile',{questions :questions, answers : answers,user:user[0],name :req.session.username , loggedin : req.session.loggedIn})
+  if (req.session.loggedIn){
+      const questions = await getQuestion(req.session.username)
+      const answers = await getAnswers(req.session.username)
+      const user = await getUser(req.session.username)
+      res.render('profile',{questions :questions, answers : answers,user:user[0],name :req.session.username })
+  }
+  else{
+      res.redirect('/login') 
+  }
 })
 
 app.get('/statistics', async (req, res) => {
@@ -103,6 +127,12 @@ app.get('/statistics', async (req, res) => {
                         question_values:result.question_values})
 
 
+})
+
+
+app.get('/s', (req, res) => {
+  res.send('35')
+            setTimeout(() => {  res.send('33')}, 4000);
 })
 
 app.listen(3000,()=>console.log("listening"))

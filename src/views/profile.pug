@@ -1,8 +1,5 @@
 img(src='logo.png' alt='Logo' class='logo-image' onclick="window.location.replace('/')")
 
-mixin login(loggedin,username)  
-     -let name = loggedin
-
 div.upper-div
   div.div-title Click on a question title to see more!
   div.usr
@@ -26,6 +23,5 @@ div.answers-class
     p="date : "+val.answer_date
   
 include navbar.pug
-+login(loggedin,name)
 
 link(rel='stylesheet', href='/profile.css', type='text/css')

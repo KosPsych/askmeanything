@@ -22,15 +22,6 @@ async  function CreateUser (req){
   }
 
  
-  
-async  function UpdUser (){
-        await User.updateOne(
-        { name: "Nick" },
-        {
-          $set: { "password": "LL"}
-        }
-     )
-    }
 
 async  function getUser (username){
       const users = await User.find({username:username})
@@ -87,14 +78,19 @@ async function getQuestionByKeyword (foo) {
   else return questions
 }
 
-async  function UpdateQuestion (question_title,name,answer_id){
-    const x = await Question.updateOne(
-     { title: question_title, username:name },
+async  function UpdateQuestion (question_title,name,question_text,keywords){
+     console.log(question_title,name,question_text,keywords)
+     await Question.updateMany(
+     { title: question_title, asked_by:name},
     {
-      $push: { "answers": 'answer_id'}
+      $set: { question_text: question_text,
+              keywords: keywords,
+               __v: 1
+          }
+     
     }
  )
- return
+ return 'question updated'
 }
 
 async  function CreateAnswer (req){
@@ -126,4 +122,4 @@ async  function CreateAnswer (req){
       }
       
   }     
-module.exports = {UpdUser,CreateQuestion,CreateUser,CreateAnswer,getUser,getQuestion,UpdateQuestion,getAnswers, getQuestionByKeyword}
+module.exports = {CreateQuestion,CreateUser,CreateAnswer,getUser,getQuestion,UpdateQuestion,getAnswers, getQuestionByKeyword,UpdateQuestion}
