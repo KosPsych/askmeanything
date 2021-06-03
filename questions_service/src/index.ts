@@ -8,7 +8,7 @@ import {CreateQuestionRouter} from './routes/create_question'
 const URI="mongodb+srv://dbUser:dbUser@cluster0.shluc.mongodb.net/questions_service_db?retryWrites=true&w=majority"
 const connectDB = async ()=>{
   await mongoose.connect(URI,{useUnifiedTopology: true},{ useNewUrlParser: true })
-  console.log("connected")
+  console.log("connected to questions db")
 }
 
 connectDB()
@@ -24,8 +24,8 @@ app.use(CreateQuestionRouter)
 
 
 
-app.listen(3001, ()=>{
-    console.log('listening')
+app.listen(4001, ()=>{
+    console.log('listening for questions on 4001...')
 })
 
 
