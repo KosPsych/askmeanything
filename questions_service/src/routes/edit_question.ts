@@ -22,8 +22,4 @@ router.post('/edit_question',
     
   })
 
-
-  
-
-
 export {router as EditQuestionRouter}

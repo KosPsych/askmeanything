@@ -1,12 +1,11 @@
 import express from 'express'
-import {json} from 'body-parser'
 const mongoose = require('mongoose')
-
+require('dotenv').config()
 
 import {CreateQuestionRouter} from './routes/create_question'
 import {EditQuestionRouter} from './routes/edit_question'
 
-const URI="mongodb+srv://dbUser:dbUser@cluster0.shluc.mongodb.net/questions_service_db?retryWrites=true&w=majority"
+const URI=process.env.db_uri
 const connectDB = async ()=>{
   await mongoose.connect(URI,{useUnifiedTopology: true},{ useNewUrlParser: true })
   console.log("connected to questions db")

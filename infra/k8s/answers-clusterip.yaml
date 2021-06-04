@@ -1,0 +1,13 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: answer-clusterip-srv
+spec:
+  selector:
+    app: answer
+  ports:
+    - name: answer
+      protocol: TCP
+      port: 4002
+      targetPort: 4002     

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: answer-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: answer
+  template:
+    metadata:
+      labels:
+        app: answer
+    spec:
+      containers:
+        - name: answer
+          image: epitheoritis/answer
+          imagePullPolicy: Never
+
+  

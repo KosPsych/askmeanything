@@ -1,11 +1,11 @@
 import express from 'express'
-import {json} from 'body-parser'
 const mongoose = require('mongoose')
+require('dotenv').config()
 
 import {SignupRouter} from './routes/signup'
 import {SigninRouter} from './routes/signin'
 
-const URI="mongodb+srv://dbUser:dbUser@cluster0.shluc.mongodb.net/auth_service_db?retryWrites=true&w=majority"
+const URI=process.env.db_uri
 const connectDB = async ()=>{
   await mongoose.connect(URI,{useUnifiedTopology: true},{ useNewUrlParser: true })
   console.log("connected to auth db")
