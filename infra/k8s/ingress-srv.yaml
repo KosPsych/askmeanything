@@ -20,4 +20,8 @@ spec:
           - path: /create_question
             backend:
               serviceName: questions-clusterip-srv
-              servicePort: 4001       
+              servicePort: 4001 
+          - path: /edit_question
+            backend:
+              serviceName: questions-clusterip-srv
+              servicePort: 4001          
