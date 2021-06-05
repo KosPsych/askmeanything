@@ -1,19 +1,22 @@
 import express from 'express'
-
+import nats,{Message}  from 'node-nats-streaming'
 const mongoose = require('mongoose')
 require('dotenv').config()
-
-
+import {natsclient} from './nats-client'
 import {CreateAnswerRouter} from './routes/create_answer'
 import {EditAnswerRouter} from './routes/edit_answer'
 
 const URI= process.env.db_uri
-const connectDB = async ()=>{
+
+const connect = async ()=>{
+  await natsclient.connect('questions','qid2',"http://localhost:4222")
   await mongoose.connect(URI,{useUnifiedTopology: true},{ useNewUrlParser: true })
   console.log("connected to answers db")
+  natsclient.listen() //start subscription
 }
 
-connectDB()
+
+connect()
 
 const app = express()
 app.use(express.json())

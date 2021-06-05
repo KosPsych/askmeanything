@@ -1,7 +1,7 @@
 import {Request,Response}  from 'express'
 const jwt = require('jsonwebtoken')
 import {Answer} from './db_model'
-
+import  { Message }from 'node-nats-streaming';
 let secretToken = process.env.token
 
 export function verifyToken(req : Request, res : Response , next : Function) {
@@ -30,4 +30,25 @@ export async function answer_limit(req : Request, res : Response , next : Functi
         next()
     }
  }
+
+
+
+export async function update_after_edit(data:any,msg:Message) {
+     
+    await Answer.updateMany(
+        { question_title: data.question_title, 
+          question_user:data.asked_by
+        },
+    
+       {
+         $set: { question_title: data.new_question_title,
+                  __v: 1
+         }
+       })
+    msg.ack()   
+    
+
+
+    
+ } 
 

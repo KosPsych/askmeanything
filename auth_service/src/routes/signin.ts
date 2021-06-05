@@ -5,7 +5,8 @@ import {User} from '../db_model'
 import {Password} from '../password'
 
 const router = express.Router()
-const secretToken = 'secret'
+const secretToken = process.env.token
+
 async function authentication(req :Request, res :Response, next : Function){
     const user = await User.find({username:req.body.username})
     if (user.length == 0) {res.send('incorrect username') }
