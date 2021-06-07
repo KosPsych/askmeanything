@@ -3,10 +3,7 @@ import  mongoose  from "mongoose";
 
 interface UserAttrs {
     username:string,
-    name:string,
-    surname:string,
-    password:string,
-    email:string
+    password:string
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -15,18 +12,12 @@ interface UserModel extends mongoose.Model<UserDoc> {
 
 interface UserDoc extends mongoose.Document{
     username:string,
-    name:string,
-    surname:string,
-    password:string,
-    email:string
+    password:string
 }
 
 const UserSchema = new mongoose.Schema({
     username:String,
-    name:String,
-    surname:String,
-    password:String,
-    email:String
+    password:String
   })
 
 UserSchema.statics.build = (attrs : UserAttrs)=>{

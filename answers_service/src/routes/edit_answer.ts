@@ -1,6 +1,8 @@
 import express,{Request,Response}  from 'express'
 import {Answer} from '../db_model'
 import {verifyToken} from '../utils'
+import {natsclient} from '../nats-client'
+
 const router = express.Router()
 
 
@@ -20,7 +22,14 @@ verifyToken,
      }
    })
   if (query_res.n>0){
-    res.send('answer edited')
+      const data = JSON.stringify({
+      question_title:req.body.question_title,
+      question_user:req.body.question_user,
+      answered_by:req.body.answered_by,
+      answer_text: req.body.answer_text
+      })  
+      natsclient.client.publish('answer:edited',data)
+      res.send('answer edited')
   }
   else{
     res.send('an error occured')

@@ -18,10 +18,7 @@ router.post('/signup',async (req : Request, res : Response)=>{
     else{
        const user = await User.build({
            username : req.body.username,
-           name :req.body.user,
-           surname :req.body.surname,
-           password :hashed_password,
-           email:req.body.email
+           password :hashed_password
        })
         
        let answered = true

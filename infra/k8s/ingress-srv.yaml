@@ -32,4 +32,16 @@ spec:
           - path: /create_answer
             backend:
               serviceName: answer-clusterip-srv
-              servicePort: 4002                
+              servicePort: 4002
+          - path: /profile/(*)?
+            backend:
+              serviceName: query-clusterip-srv
+              servicePort: 4003
+          - path: /statistics
+            backend:
+              serviceName: query-clusterip-srv
+              servicePort: 4003 
+          - path: /question_view/(*)?
+            backend:
+              serviceName: query-clusterip-srv
+              servicePort: 4003                              
