@@ -7,8 +7,6 @@ const fetch = require("node-fetch");
 
 
 
-const {getQuestion,getAnswers,getUser} = require('./Model/database_utils.js')
-const {Statistics} = require('./utils.js')
 // Connect to DB
 const URI="mongodb+srv://dbUser:dbUser@cluster0.shluc.mongodb.net/MVCDatabase?retryWrites=true&w=majority"
 const connectDB = async ()=>{
@@ -29,7 +27,7 @@ app.set('view engine','pug')
 app.set('views','./views')
 app.use(express.static('public'))
 
-//Controllers , post requests
+//Controllers , POST requests
 require('./Controllers/signup_controller')(app)
 require('./Controllers/signin_controller')(app)
 require('./Controllers/create_question_controller')(app)
@@ -37,11 +35,21 @@ require('./Controllers/create_answer_controller')(app)
 require('./Controllers/search_by_keyword')(app)
 require('./Controllers/edit_question_controller')(app)
 
-
-// direct access to model or plain html
+// direct access to model or plain html,GET requests
+require('./direct_access/home')(app)
+require('./direct_access/logout')(app)
+require('./direct_access/login')(app)
+require('./direct_access/signup')(app)
+require('./direct_access/create_question')(app)
+require('./direct_access/question_view')(app)
+require('./direct_access/edit_question')(app)
+require('./direct_access/profile')(app)
+require('./direct_access/statistics')(app)
+/*
 app.get('/login', (req, res) => {
   res.render('login',{status:''})
 })
+
 
 app.get('/', (req, res) => {
   res.render('home',{name :req.session.username ,loggedin : req.session.loggedIn})
@@ -53,6 +61,7 @@ req.session.destroy((err)=>{})
 res.redirect('/') 
 })
 
+
 app.get('/signup', (req, res) => {
   if (req.session.loggedIn){
     res.redirect('/') 
@@ -61,6 +70,7 @@ app.get('/signup', (req, res) => {
     res.render('signup',{status:''})
   }
 })
+
 
 app.get('/create_question', (req, res) => {
   if (req.session.loggedIn){
@@ -85,6 +95,7 @@ app.get('/question_view/:question_id', async (req,res)=>
   
 })
 
+
 app.get('/edit_question', async (req,res)=>{
   if (req.session.loggedIn){
        if (req.query.asked_by && req.query.question_title ){
@@ -102,6 +113,7 @@ app.get('/edit_question', async (req,res)=>{
   }
   
       })
+      
 
 app.get('/profile', async (req, res) => {
   if (req.session.loggedIn){
@@ -129,11 +141,7 @@ app.get('/statistics', async (req, res) => {
 
 })
 
-
-app.get('/s', (req, res) => {
-  res.send('35')
-            setTimeout(() => {  res.send('33')}, 4000);
-})
+*/
 
 app.listen(3000,()=>console.log("listening"))
 

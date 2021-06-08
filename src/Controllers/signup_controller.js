@@ -4,7 +4,6 @@ module.exports = (app) => {
     app.post('/signup',async (req,res)=>{
   
         const exists = await getUser(req.body.username)
-        console.log(req.body.username)
         if (exists.length == 1) {res.render('signup',{status:'username already exists'}) } 
         else
         {
