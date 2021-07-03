@@ -14,7 +14,7 @@ const connectDB = async ()=>{
   console.log("connected")
 }
 
-//connectDB()
+connectDB()
   
 app.use(session({secret:'Keep it secret'
 ,name:'session_id'
@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine','pug')
 app.set('views','./src/views')
-app.use(express.static('public'))
+app.use(express.static('./src/public'))
 
 require('./production')(app)
 //Controllers , POST requests
