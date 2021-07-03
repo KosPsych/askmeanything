@@ -1,5 +1,7 @@
 img(src='logo.png' alt='Logo' class='logo-image' onclick="window.location.replace('/')")
 include navbar.pug
+style
+ include ../public/home.css
 div
     .div-class If you have one question, find many answers!
     if !loggedin
@@ -24,4 +26,4 @@ if loggedin
         a(class='utils-btn' href='/create_question') Ask a new Question!
 
 
-link(rel='stylesheet', href='/home.css', type='text/css')
+link(rel='stylesheet', href='.../home.css', type='text/css')
