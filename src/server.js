@@ -4,7 +4,7 @@ const app = express()
 const session = require('express-session')
 const path = require('path');
 const fetch = require("node-fetch");
-
+require('dotenv').config()
 
 
 // Connect to DB
@@ -27,6 +27,7 @@ app.set('view engine','pug')
 app.set('views','./src/views')
 app.use(express.static('public'))
 
+require('./production')(app)
 //Controllers , POST requests
 require('./Controllers/signup_controller')(app)
 require('./Controllers/signin_controller')(app)
