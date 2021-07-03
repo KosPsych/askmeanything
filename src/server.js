@@ -9,6 +9,8 @@ require('dotenv').config()
 
 // Connect to DB
 const URI = "mongodb+srv://dbUser:dbUser@cluster0.shluc.mongodb.net/MVCDatabase?retryWrites=true&w=majority"
+console.log(URI)
+console.log(process.env.db_uri)
 const connectDB = async ()=>{
   await mongoose.connect(URI,{useUnifiedTopology: true},{ useNewUrlParser: true })
   console.log("connected")
