@@ -14,7 +14,7 @@ const connectDB = async ()=>{
   console.log("connected")
 }
 
-connectDB()
+//connectDB()
   
 app.use(session({secret:'Keep it secret'
 ,name:'session_id'
