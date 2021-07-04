@@ -4,7 +4,7 @@ const app = express()
 const session = require('express-session')
 require('dotenv').config()
 
-
+ 
 // Connect to DB
 const URI = process.env.db_uri
 const connectDB = async ()=>{
