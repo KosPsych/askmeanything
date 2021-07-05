@@ -6,6 +6,7 @@ import {natsclient} from './nats-client'
 import {ProfileRouter} from './routes/profile'
 import {QuestionviewRouter} from './routes/question_view'
 import {StatisticsRouter} from './routes/statistics'
+import {HomeRouter} from './routes/home'
 const URI=process.env.db_uri
 
 const connectDB = async ()=>{  
@@ -22,6 +23,7 @@ app.use(cors({origin: 'http://localhost:3000'}));
 app.use(ProfileRouter)
 app.use(QuestionviewRouter)
 app.use(StatisticsRouter)
+app.use(HomeRouter)
 
 app.listen(4003, ()=>{
     console.log('listening for queries on 4003..')
