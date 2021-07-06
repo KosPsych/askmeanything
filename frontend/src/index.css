@@ -1,224 +1,234 @@
 .textarea1 {
   min-height: 114px;
 }
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
-    
-    .topnav {
-      overflow: hidden;
-      background-color: #333;
-    }
-    .topnav-b{
-      float: left;
-      color: rgb(0, 260, 0);
-      font-family: 'Exo', sans-serif;
-      }
-      
-      .topnav-b span{
-      color: #ffffff !important;
-      }
-    
-    .topnav a {
-      float: left;
-      color: #f2f2f2;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      font-size: 17px;
-    }
-    
-    .topnav a:hover {
-      background-color: #ddd;
-      color: black;
-    }
-    
-    .topnav a.active {
-      background-color: rgb(0, 260, 0);
-      color: white;
-    }
-    
-    .topnav-right {
-      float: right;
-    }
 
-    .dropdown {
-      float: left;
-      overflow: hidden;
-    }
-    
-    .dropdown .dropbtn {
-      font-size: 16px;  
-      border: none;
-      outline: none;
-      color: white;
-      padding: 18px 16px;
-      background-color: inherit;
-      font-family: inherit;
-      margin: 0;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-    }
-  
-    .dropdown-content a {
-      float: none;
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-      text-align: left;
-    }
-    
-    .dropdown-content a:hover {
-      background-color: #ddd;
-    }
-    
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
 
-    .body1 {
-      font-family: Arial;
-      font-size: 17px;
-      padding: 8px;
-    }
-    
-    * {
-      box-sizing: border-box;
-    }
-    
-    .row {
-      display: -ms-flexbox; /* IE10 */
-      display: flex;
-      -ms-flex-wrap: wrap; /* IE10 */
-      flex-wrap: wrap;
-      margin: 0 -16px;
-    }
-    
-    .col-25 {
-      -ms-flex: 25%; /* IE10 */
-      flex: 25%;
-    }
-    
-    .col-50 {
-      -ms-flex: 50%; /* IE10 */
-      flex: 50%;
-    }
-    
-    .col-75 {
-      -ms-flex: 75%; /* IE10 */
-      flex: 75%;
-    }
-    
-    .col-25,
-    .col-50,
-    .col-75 {
-      padding: 0 16px;
-    }
-    
-    .container {
-      background-color: #f2f2f2;
-      padding: 5px 20px 15px 20px;
-      border: 1px solid lightgrey;
-      border-radius: 3px;
-    }
-    
-    input[type=text] {
-      width: 100%;
-      margin-bottom: 20px;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-    }
+.topnav-b {
+  float: left;
+  color: rgb(0, 260, 0);
+  font-family: 'Exo', sans-serif;
+}
 
-    input[type=button1]{
-      width: 260px;
-      height: 35px;
-      background: rgb(0, 260, 0);
-      border: 1px solid rgb(0, 260, 0);
-      cursor: pointer;
-      border-radius: 8px;
-      color: #ffffff;
-      font-family: 'Exo', sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      padding: 6px;
-      margin-top: 10px;
-      }
-      input[type=button2]{
-        width: 260px;
-        height: 35px;
-        background: rgb(190, 0, 0);
-        border: 1px solid rgb(153, 0, 0);
-        cursor: pointer;
-        border-radius: 8px;
-        color: #ffffff;
-        font-family: 'Exo', sans-serif;
-        font-size: 16px;
-        font-weight: 400;
-        padding: 6px;
-        margin-top: 10px;
-        }
-    
-    label {
-      margin-bottom: 10px;
-      display: block;
-    }
-    
-    .icon-container {
-      margin-bottom: 20px;
-      padding: 7px 0;
-      font-size: 24px;
-    }
-    
-    .btn {
-      background-color: rgb(0, 260, 0);
-      color: white;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
-      width: 100%;
-      border-radius: 3px;
-      cursor: pointer;
-      font-size: 17px;
-    }
-    
-    .btn:hover {
-      background-color: rgb(0, 260, 0);
-    }
-    
-    a {
-      color: #2196F3;
-    }
-    
-    hr {
-      border: 1px solid lightgrey;
-    }
-    
-    span.price {
-      float: right;
-      color: grey;
-    }
+.topnav-b span {
+  color: #ffffff !important;
+}
 
-    
-    /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
-    @media (max-width: 800px) {
-      .row {
-        flex-direction: column-reverse;
-      }
-      .col-25 {
-        margin-bottom: 20px;
-      }
-    }
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: rgb(0, 260, 0);
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 18px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.body1 {
+  font-family: Arial;
+  font-size: 17px;
+  padding: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  display: -ms-flexbox;
+  /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap;
+  /* IE10 */
+  flex-wrap: wrap;
+  margin: 0 -16px;
+}
+
+.col-25 {
+  -ms-flex: 25%;
+  /* IE10 */
+  flex: 25%;
+}
+
+.col-50 {
+  -ms-flex: 50%;
+  /* IE10 */
+  flex: 50%;
+}
+
+.col-75 {
+  -ms-flex: 75%;
+  /* IE10 */
+  flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+  padding: 0 16px;
+}
+
+.container {
+  background-color: #f2f2f2;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+}
+
+input[type=text] {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+input[type=button1] {
+  width: 260px;
+  height: 35px;
+  background: rgb(0, 260, 0);
+  border: 1px solid rgb(0, 260, 0);
+  cursor: pointer;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 6px;
+  margin-top: 10px;
+}
+
+input[type=button2] {
+  width: 260px;
+  height: 35px;
+  background: rgb(190, 0, 0);
+  border: 1px solid rgb(153, 0, 0);
+  cursor: pointer;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 6px;
+  margin-top: 10px;
+}
+
+label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
+}
+
+.btn {
+  background-color: rgb(0, 260, 0);
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.btn:hover {
+  background-color: rgb(0, 260, 0);
+}
+
+a {
+  color: #2196F3;
+}
+
+hr {
+  border: 1px solid lightgrey;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
