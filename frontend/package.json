@@ -11,6 +11,7 @@
     "bootstrap": "^4.6.0",
     "chart.js": "^3.4.1",
     "chokidar": "^3.5.2",
+    "datatables.net-dt": "^1.1.0",
     "date-fns": "^2.19.0",
     "foundation-sites": "^6.6.3",
     "materialize-css": "^1.0.0",
