@@ -10,7 +10,6 @@ class SignIn extends React.Component {
   }
 
   async handleSubmit () {
-    localStorage.setItem('value', 'admin')
     var x = document.forms['login']['userid'].value
     var y = document.forms['login']['pswrd'].value
     if (x === '' || y === '') {
@@ -88,7 +87,10 @@ class SignIn extends React.Component {
                     onClick={this.handleSubmit.bind(this)}
                     value='Sign in'
                   />
-                  <h6>Don't have an account? Click <a href='/SignUp'>here</a> to sign up instead!</h6>
+                  <h6>
+                    Don't have an account? Click <a href='/SignUp'>here</a> to
+                    sign up instead!
+                  </h6>
                 </div>
               </form>
             </Cell>

@@ -26,7 +26,7 @@ class Statistics extends React.Component {
         var count_today = 0
         var count_week = 0
         var count_month = 0
-        var keywords = [];
+        var keywords = []
         data.forEach(function (item) {
           var newDate = new Date()
           const today = new Date(moment(newDate).format(format))
@@ -46,48 +46,50 @@ class Statistics extends React.Component {
           }
           var count = 0
           while (item.keywords.length !== 0 && count < item.keywords.length) {
-               count++
-                keywords.push(item.keywords[count-1]);
-              }
+            count++
+            keywords.push(item.keywords[count - 1])
+          }
         })
         localStorage.setItem('today', count_today)
         localStorage.setItem('week', count_week)
         localStorage.setItem('month', count_month)
         localStorage.setItem('total', count_total)
 
-        var count1 = {};
-        keywords.forEach(function(i) { 
-          count1[i] = (count1[i]||0) + 1;
-        });
-        var keys = keys = Object.keys(count1);
-        var p = keys.sort(function(a,b){return count1[b]-count1[a]});
+        var count1 = {}
+        keywords.forEach(function (i) {
+          count1[i] = (count1[i] || 0) + 1
+        })
+        var keys = (keys = Object.keys(count1))
+        var p = keys.sort(function (a, b) {
+          return count1[b] - count1[a]
+        })
         localStorage.setItem('key1', p[0])
         localStorage.setItem('key2', p[1])
         localStorage.setItem('key3', p[2])
         localStorage.setItem('key4', p[3])
         localStorage.setItem('key5', p[4])
-        var key1_count=0;
-        var key2_count=0;
-        var key3_count=0;
-        var key4_count=0;
-        var key5_count=0;
-        keywords.forEach(function(i){
-           if(i===localStorage.getItem("key1")){
+        var key1_count = 0
+        var key2_count = 0
+        var key3_count = 0
+        var key4_count = 0
+        var key5_count = 0
+        keywords.forEach(function (i) {
+          if (i === localStorage.getItem('key1')) {
             key1_count++
-           }
-           if(i===localStorage.getItem("key2")){
+          }
+          if (i === localStorage.getItem('key2')) {
             key2_count++
-           }
-           if(i===localStorage.getItem("key3")){
+          }
+          if (i === localStorage.getItem('key3')) {
             key3_count++
-           }
-           if(i===localStorage.getItem("key4")){
+          }
+          if (i === localStorage.getItem('key4')) {
             key4_count++
-           }
-           if(i===localStorage.getItem("key5")){
+          }
+          if (i === localStorage.getItem('key5')) {
             key5_count++
-           }
-        });
+          }
+        })
         localStorage.setItem('key1_count', key1_count)
         localStorage.setItem('key2_count', key2_count)
         localStorage.setItem('key3_count', key3_count)
@@ -113,11 +115,26 @@ class Statistics extends React.Component {
               loader={<div>Loading Chart</div>}
               data={[
                 ['Keywords', 'appearances'],
-                [localStorage.getItem("key1"), localStorage.getItem('key1_count') * 1],
-                [localStorage.getItem("key2"), localStorage.getItem('key2_count') * 1],
-                [localStorage.getItem("key3"), localStorage.getItem('key3_count') * 1],
-                [localStorage.getItem("key4"), localStorage.getItem('key4_count') * 1],
-                [localStorage.getItem("key5"), localStorage.getItem('key5_count') * 1]
+                [
+                  localStorage.getItem('key1'),
+                  localStorage.getItem('key1_count') * 1
+                ],
+                [
+                  localStorage.getItem('key2'),
+                  localStorage.getItem('key2_count') * 1
+                ],
+                [
+                  localStorage.getItem('key3'),
+                  localStorage.getItem('key3_count') * 1
+                ],
+                [
+                  localStorage.getItem('key4'),
+                  localStorage.getItem('key4_count') * 1
+                ],
+                [
+                  localStorage.getItem('key5'),
+                  localStorage.getItem('key5_count') * 1
+                ]
               ]}
               options={{
                 title: 'Top 5 keywords',

@@ -54,19 +54,22 @@
     padding: 10px;
 
 }
-.signup h6{
+
+.signup h6 {
     font-size: .8rem;
     color: white;
     line-height: 3.4;
     margin-top: 0;
     margin-bottom: .5rem;
 }
-.signup a{
+
+.signup a {
     line-height: inherit;
     color: rgb(0, 260, 0);
     text-decoration: none;
     cursor: pointer;
 }
+
 .signup input[type=text] {
     width: 250px;
     height: 30px;

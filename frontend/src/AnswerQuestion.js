@@ -158,7 +158,6 @@ class AnswerQuestion extends React.Component {
     var res1 = str1.replace(str1, replacekeywords1)
     document.getElementById('answers').innerHTML = res1
 
-
     var replacekeywords2 = []
     types.forEach(function (item) {
       replacekeywords2.push('<h6 value=' + item + '>' + item + '</h6>')

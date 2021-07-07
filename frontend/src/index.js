@@ -11,6 +11,9 @@ import AskNewQuestion from './AskNewQuestion'
 import AnswerQuestion from './AnswerQuestion.js'
 import MyAnswers from './MyAnswers'
 import MyQuestions from './MyQuestions'
+import EditAnswer from './EditAnswer'
+import EditQuestion from './EditQuestion'
+import SeeAnswers from './SeeAnswers'
 import Statistics from './Statistics'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
@@ -50,8 +53,8 @@ class App extends React.Component {
                 </div>
               </a>
               <a href='/Statistics'>
-                <i class='fa fa-bar-chart'></i> See the statistics for all
-                aksed questions
+                <i class='fa fa-bar-chart'></i> See the statistics for all aksed
+                questions
               </a>
               <a href='/AskNewQuestion'>
                 <i className='fa fa-commenting-o'></i> Ask a new question
@@ -79,6 +82,9 @@ class App extends React.Component {
               <Route path='/MyAnswers' component={MyAnswers} />
               <Route path='/MyQuestions' component={MyQuestions} />
               <Route path='/Statistics' component={Statistics} />
+              <Route path='/EditQuestion' component={EditQuestion} />
+              <Route path='/EditAnswer' component={EditAnswer} />
+              <Route path='/SeeAnswers' component={SeeAnswers} />
               <Route path='/SignOut' component={SignOut} />
               <Route path='/' component={Statistics} />
             </Switch>
@@ -114,8 +120,8 @@ class App extends React.Component {
                 </div>
               </a>
               <a href='/Statistics'>
-                <i class='fa fa-bar-chart'></i> See the statistics for all
-                aksed questions
+                <i class='fa fa-bar-chart'></i> See the statistics for all aksed
+                questions
               </a>
               <div className='topnav-right'>
                 <a href='/SignIn'>

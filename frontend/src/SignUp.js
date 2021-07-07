@@ -95,7 +95,10 @@ class SignUp extends React.Component {
                     onClick={this.handleSubmit.bind(this)}
                     value='Sign up'
                   />
-                  <h6>You already have an account then click <a href='/SignIn'>here</a> !</h6>
+                  <h6>
+                    You already have an account then click{' '}
+                    <a href='/SignIn'>here</a> !
+                  </h6>
                 </div>
               </form>
             </Cell>
