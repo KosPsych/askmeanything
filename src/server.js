@@ -44,6 +44,8 @@ require('./direct_access/question_view')(app)
 require('./direct_access/edit_question')(app)
 require('./direct_access/profile')(app)
 require('./direct_access/statistics')(app)
+require('./direct_access/contact')(app)
+require('./direct_access/browse_questions')(app)
 
 
 app.listen(process.env.PORT || 3000,()=>console.log("listening"))

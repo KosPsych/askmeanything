@@ -1,0 +1,27 @@
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+    }   
+
+h1 {
+        color: #BF4040;
+        padding: 10px;
+        margin: 10px;
+        text-align: center;
+        }
+p {
+    margin-left: 710px;
+}
+
+#link {
+    font-size: 30px;
+    margin-left: 710px;
+    color: blue;
+    display: inline-block;
+    text-align: center; 
+}
+#link:hover{
+    color: rgb(0, 68, 255); 
+}
