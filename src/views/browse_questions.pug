@@ -5,7 +5,7 @@ h1  Questions
 div.answers-class 
   each val in questions
     
-    a(href='http://localhost:3000/question_view/'+val.title.replace(" ", "-")+"?askedby="+val.asked_by id="link") !{val.title} 
+    a(href='https://ntuaskmeanything.herokuapp.com//question_view/'+val.title.replace(" ", "-")+"?askedby="+val.asked_by id="link") !{val.title} 
     p="date : "+val.question_date
     p="keywords : "+val.keywords
     hr

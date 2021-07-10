@@ -12,14 +12,14 @@ h2 Questions Asked by You
 
 div.questions-class
   each val in questions
-    a(href='http://localhost:3000/question_view/'+val.title.replace(" ", "-")+"?askedby="+val.asked_by) Question Title: !{val.title} 
+    a(href='https://ntuaskmeanything.herokuapp.com/question_view/'+val.title.replace(" ", "-")+"?askedby="+val.asked_by) Question Title: !{val.title} 
     p="Date Asked: "+val.question_date
 
 h2 Your Answers
 
 div.answers-class 
   each val in answers
-    a(href='http://localhost:3000/question_view/'+val.question_title.replace(" ", "-")+"?askedby="+val.question_user) !{val.question_title} 
+    a(href='https://ntuaskmeanything.herokuapp.com/question_view/'+val.question_title.replace(" ", "-")+"?askedby="+val.question_user) !{val.question_title} 
     p="date : "+val.answer_date
   
 include navbar.pug
