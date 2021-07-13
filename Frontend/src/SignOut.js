@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid, Cell } from 'react-foundation'
 
 class SignOut extends React.Component {
   componentDidMount () {
@@ -27,6 +28,8 @@ class SignOut extends React.Component {
           <meta charSet='UTF-8' />
           <title>Login</title>
 
+          <Grid className='body-login dispay'>
+            <Cell large={10} medium={10}>
               <div className='header-login'>
                 <a href='/'>
                   <div>
@@ -58,6 +61,8 @@ class SignOut extends React.Component {
                   <input type='button' value='Login' />
                 </div>
               </form>
+            </Cell>
+          </Grid>
         </body>
       </html>
     )

@@ -1,5 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
+import { Grid, Cell } from 'react-foundation'
 
 class SignIn extends React.Component {
   constructor (props) {
@@ -51,7 +52,9 @@ class SignIn extends React.Component {
           <meta charSet='UTF-8' />
           <title>Login</title>
 
-              <div className='header-login'>
+          <Grid className='body-login dispay'>
+            <Cell large={10} medium={10}>
+              <div className='header-login' >
                 <a href='/'>
                   <div>
                     Ask<span>me</span>anything
@@ -90,6 +93,8 @@ class SignIn extends React.Component {
                   </h6>
                 </div>
               </form>
+            </Cell>
+          </Grid>
         </body>
       </html>
     )
