@@ -11,15 +11,12 @@ class SignOut extends React.Component {
       },
       body: JSON.stringify({ title: 'Signout' })
     }
-    fetch('//localhost:4000/Signout', requestOptions)
-      .then(() => {
+    
         localStorage.setItem('token', null)
         localStorage.setItem('logged', false)
-        window.location = '//localhost:3000/SignIn'
-      })
-      .catch(error => {
-        console.error(error)
-      })
+        window.location = '//askmeanything.com'
+     
+      
   }
   render () {
     return (

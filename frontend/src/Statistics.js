@@ -15,7 +15,7 @@ class Statistics extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//localhost:4003/statistics', requestOptions)
+    fetch('//askmeanything.com/statistics', requestOptions)
       .then(response => {
         return response.json()
       })

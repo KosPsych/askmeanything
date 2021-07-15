@@ -32,12 +32,12 @@ class SignIn extends React.Component {
     }
 
     try {
-      const req = await fetch('http://localhost:4000/login', requestOptions)
+      const req = await fetch('http://askmeanything.com/login', requestOptions)
       const data = await req.json()
       localStorage.setItem('token', data.token)
       localStorage.setItem('username', x)
       localStorage.setItem('logged', true)
-      window.location = '//localhost:3000'
+      window.location = '//askmeanything.com'
     } catch (error) {
       alert('Wrong username or password')
       window.location.reload()

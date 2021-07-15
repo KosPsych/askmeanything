@@ -4,9 +4,10 @@ metadata:
   name: ingress-srv
   annotations:
     kubernetes.io/ingress.class: nginx
+    #nginx.ingress.kubernetes.io/use-regex : 'true'
 spec:
   rules:
-    - host: askmeanything.com
+    - host: http://34.118.121.220/
       http:
         paths:
           - path: /login
@@ -16,15 +17,15 @@ spec:
           - path: /signup
             backend:
               serviceName: auth-clusterip-srv
-              servicePort: 4000  
+              servicePort: 4000 
           - path: /create_question
             backend:
               serviceName: questions-clusterip-srv
-              servicePort: 4001 
+              servicePort: 4001
           - path: /edit_question
             backend:
               serviceName: questions-clusterip-srv
-              servicePort: 4001  
+              servicePort: 4001
           - path: /edit_answer
             backend:
               serviceName: answer-clusterip-srv
@@ -44,4 +45,13 @@ spec:
           - path: /question_view/(*)?
             backend:
               serviceName: query-clusterip-srv
-              servicePort: 4003                              
+              servicePort: 4003 
+          - path: /home
+            backend:
+              serviceName: query-clusterip-srv
+              servicePort: 4003                   
+          - path: /
+            backend:
+              serviceName: client-clusterip-srv
+              servicePort: 3000
+              

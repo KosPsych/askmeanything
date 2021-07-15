@@ -35,14 +35,13 @@ class SignUp extends React.Component {
       },
       body: JSON.stringify(bodyFormData2)
     }
-    fetch('//localhost:4000/signup', requestOptions)
+    fetch('//askmeanything.com/signup', requestOptions)
       .then(response => {
-        window.location = '//localhost:3000/SignIn'
-        return response.json()
+        window.location = '//askmeanything.com/SignIn'
       })
       .catch(error => {
-        alert('Something went wrong')
-        window.location.reload()
+        //alert('Something went wrong')
+        //window.location.reload()
         console.error(error)
       })
   }

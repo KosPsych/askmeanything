@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: questions-depl
+  name: client-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: questions
+      app: client
   template:
     metadata:
       labels:
-        app: questions
+        app: client
     spec:
       containers:
-        - name: questions
-          image: us.gcr.io/askmeanything-319815/question
+        - name: client
+          image: us.gcr.io/askmeanything-319815/client
           imagePullPolicy: IfNotPresent

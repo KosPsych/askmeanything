@@ -5,10 +5,12 @@ deploy:
     manifests:
       - ./infra/k8s/*
 build:
-  local:
-    push: false
+  # local:
+    # push: false
+  googleCloudBuild:
+    projectId: askmeanything-319815  
   artifacts:
-    - image: epitheoritis/auth
+    - image: us.gcr.io/askmeanything-319815/auth
       context: auth_service
       docker:
         dockerfile: Dockerfile
@@ -16,7 +18,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: epitheoritis/questions
+    - image: us.gcr.io/askmeanything-319815/question
       context: questions_service
       docker:
         dockerfile: Dockerfile
@@ -24,11 +26,28 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: epitheoritis/answer
+    - image: us.gcr.io/askmeanything-319815/answer
       context: answers_service
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: 'src/**/*.ts'
+            dest: .
+    - image: us.gcr.io/askmeanything-319815/query
+      context: query_service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: us.gcr.io/askmeanything-319815/client
+      context: frontend
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.js'
             dest: .        
+                            

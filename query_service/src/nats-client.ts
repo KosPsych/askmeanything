@@ -60,7 +60,7 @@ class NatsClient {
         resolve();
       });
       this.client.on('error', (err) => {
-        reject('cannot connet to nats');
+        reject('cannot connect to nats');
       });
     });
   }

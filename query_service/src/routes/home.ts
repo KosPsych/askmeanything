@@ -6,7 +6,7 @@ const router = express.Router()
 
 
 
-router.get('/',
+router.get('/home',
    
     async (req,res)=>{  
     const questions = await getQuestion()

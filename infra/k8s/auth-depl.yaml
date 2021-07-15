@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: epitheoritis/auth
-          imagePullPolicy: Never
+          image: us.gcr.io/askmeanything-319815/auth
+          imagePullPolicy: IfNotPresent
 
   

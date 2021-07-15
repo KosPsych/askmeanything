@@ -18,7 +18,7 @@ class EditQuestion extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//localhost:4003/statistics', requestOptions)
+    fetch('//askmeanything.com/statistics', requestOptions)
       .then(response => {
         return response.json()
       })
@@ -77,9 +77,9 @@ class EditQuestion extends React.Component {
       },
       body: JSON.stringify(bodyFormData1)
     }
-    fetch('http://localhost:4001/edit_question', requestOptions)
+    fetch('http://askmeanything.com/edit_question', requestOptions)
       .then(res => {
-        window.location = '//localhost:3000/MyQuestions'
+        window.location = '//askmeanything.com/MyQuestions'
       })
       .catch(error => {
         window.location.reload()
@@ -88,7 +88,7 @@ class EditQuestion extends React.Component {
   }
 
   handleCancel () {
-    window.location = '//localhost:3000/MyQuestions'
+    window.location = '//askmeanything.com/MyQuestions'
   }
 
   render () {

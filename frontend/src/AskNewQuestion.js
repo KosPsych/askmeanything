@@ -37,9 +37,9 @@ class AskNewQuestion extends React.Component {
       },
       body: JSON.stringify(bodyFormData1)
     }
-    fetch('http://localhost:4001/create_question', requestOptions)
+    fetch('http://askmeanything.com/create_question', requestOptions)
       .then(res => {
-        window.location = '//localhost:3000/MyQuestions'
+        window.location = '//askmeanything.com/MyQuestions'
       })
       .catch(error => {
         window.location.reload()
@@ -48,7 +48,7 @@ class AskNewQuestion extends React.Component {
   }
 
   handleCancel () {
-    window.location = '//localhost:3000/MyAnswers'
+    window.location = '//askmeanything.com/MyAnswers'
   }
 
   render () {

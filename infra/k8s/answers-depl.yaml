@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: answer
-          image: epitheoritis/answer
-          imagePullPolicy: Never
+          image: us.gcr.io/askmeanything-319815/answer
+          imagePullPolicy: IfNotPresent
 
   

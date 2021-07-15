@@ -14,5 +14,5 @@ spec:
     spec:
       containers:
         - name: query
-          image: epitheoritis/query
-          imagePullPolicy: Never
+          image: us.gcr.io/askmeanything-319815/query
+          imagePullPolicy: IfNotPresent

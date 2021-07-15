@@ -15,7 +15,7 @@ class MyAnswers extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//localhost:4003/statistics', requestOptions)
+    fetch('//askmeanything.com/statistics', requestOptions)
       .then(response => {
         return response.json()
       })
@@ -67,7 +67,7 @@ class MyAnswers extends React.Component {
         })
         $(this.refs.main).on('click', '.editBtn', function (ev) {
           localStorage.setItem('Answertext', ev.currentTarget.id)
-          window.location = '//localhost:3000/EditAnswer'
+          window.location = '//askmeanything.com/EditAnswer'
         })
       })
       .catch(error => {
