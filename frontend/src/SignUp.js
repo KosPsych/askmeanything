@@ -8,7 +8,7 @@ class SignUp extends React.Component {
     this.state = {}
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  handleSubmit () {
+  async handleSubmit () {
     localStorage.setItem('value', 'admin')
     var x = document.forms['signup']['userid'].value
     var y = document.forms['signup']['pswrd'].value
@@ -35,15 +35,16 @@ class SignUp extends React.Component {
       },
       body: JSON.stringify(bodyFormData2)
     }
-    fetch('//askmeanything.com/signup', requestOptions)
-      .then(response => {
-        window.location = '//askmeanything.com/SignIn'
-      })
-      .catch(error => {
-        //alert('Something went wrong')
-        //window.location.reload()
-        console.error(error)
-      })
+
+    try {
+      const req = await fetch('http://localhost:4000/signup', requestOptions)
+      const data = await req.js
+      window.location = '//localhost:3000/SignIn'
+    } catch (error) {
+      alert('Something went wrong')
+      window.location.reload()
+      console.error(error)
+    }
   }
   render () {
     return (
