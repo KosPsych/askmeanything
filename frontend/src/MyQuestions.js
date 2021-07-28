@@ -27,7 +27,7 @@ class MyQuestions extends React.Component {
           }
         })
         $(this.refs.main).DataTable({
-          data: data,
+          data: Questions,
           columns: [
             {
               title: 'Question title',
