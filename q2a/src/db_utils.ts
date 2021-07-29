@@ -1,4 +1,4 @@
-import {Question} from './db_model'
+import {Answer, Question} from './db_model'
 
 export async function create_question(data:any) {
     const question = await Question.build({
@@ -7,7 +7,6 @@ export async function create_question(data:any) {
         question_text:data.question.question_text,
         question_date:data.question.question_date,
         asked_by:data.question.asked_by,
-        answers: []
     } )
     let answered=true
     const r = await question.save().catch(error => {
@@ -80,5 +79,20 @@ export async function getQuestion (username?: string  ,title? : string ){
         return questions
     }
 
-
 }
+
+export async function getAnswers (username?: string  ,quest_title? : string) {
+    if(!quest_title && !username){
+        const answers = await Answer.find()
+        return answers
+    }
+    if (quest_title){
+        const answers = await Answer.find({question_title: quest_title})
+        return answers
+    }
+    else {
+        const answers = await Answer.find({answered_by: username})
+        return answers
+    }
+}
+

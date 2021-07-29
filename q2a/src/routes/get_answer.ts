@@ -5,7 +5,7 @@ const router = express.Router()
 router.get('/get_answers/:question_title',
     async (req, res) => {
         const title = req.params.question_title.replace(/-/g, " ")
-        const answers = await getAnswers(title)
+        const answers = await getAnswers(req.app.locals.username,title)
         res.send(answers)
     })
 
