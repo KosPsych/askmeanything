@@ -14,7 +14,7 @@ class MyQuestions extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//localhost:4003/statistics', requestOptions)
+    fetch('//localhost:4001/statistics', requestOptions)
       .then(response => {
         return response.json()
       })
@@ -27,7 +27,7 @@ class MyQuestions extends React.Component {
           }
         })
         $(this.refs.main).DataTable({
-          data: data,
+          data: Questions,
           columns: [
             {
               title: 'Question title',

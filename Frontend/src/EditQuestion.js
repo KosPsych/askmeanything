@@ -18,7 +18,7 @@ class EditQuestion extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//localhost:4003/statistics', requestOptions)
+    fetch('//localhost:4001/statistics', requestOptions)
       .then(response => {
         return response.json()
       })

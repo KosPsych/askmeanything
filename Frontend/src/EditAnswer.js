@@ -17,7 +17,7 @@ class EditAnswer extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//localhost:4003/statistics', requestOptions)
+    fetch('//localhost:4001/statistics', requestOptions)
       .then(response => {
         return response.json()
       })
@@ -67,7 +67,7 @@ class EditAnswer extends React.Component {
       },
       body: JSON.stringify(bodyFormData1)
     }
-    fetch('http://localhost:4002/edit_answer', requestOptions)
+    fetch('http://localhost:4001/edit_answer', requestOptions)
       .then(res => {
         window.location = '//localhost:3000/MyAnswers'
       })
