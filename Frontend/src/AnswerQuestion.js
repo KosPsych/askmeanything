@@ -17,7 +17,7 @@ class AnswerQuestion extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//localhost:4003/', requestOptions)
+    fetch('//localhost:4001/statistics', requestOptions)
       .then(response => {
         return response.json()
       })
@@ -47,7 +47,7 @@ class AnswerQuestion extends React.Component {
       },
       body: JSON.stringify(bodyFormData1)
     }
-    fetch('//localhost:4002/create_answer', requestOptions)
+    fetch('//localhost:4001/create_answer', requestOptions)
       .then(response => {
         window.location = '//localhost:3000/MyAnswers'
         return response.json()

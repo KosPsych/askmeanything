@@ -7,7 +7,21 @@ class Statistics extends React.Component {
     super(props)
     this.state = {}
   }
-  componentDidMount () {
+  async componentDidMount () {
+    localStorage.setItem('key1_count', 0)
+        localStorage.setItem('key2_count', 0)
+        localStorage.setItem('key3_count', 0)
+        localStorage.setItem('key4_count', 0)
+        localStorage.setItem('key5_count', 0)
+        localStorage.setItem('key1', "-")
+        localStorage.setItem('key2', "-")
+        localStorage.setItem('key3', "-")
+        localStorage.setItem('key4', "-")
+        localStorage.setItem('key5', "-")
+        localStorage.setItem('today', 0)
+        localStorage.setItem('week', 0)
+        localStorage.setItem('month', 0)
+        localStorage.setItem('total', 0)
     const requestOptions = {
       method: 'GET',
       headers: {
@@ -15,11 +29,9 @@ class Statistics extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//localhost:4003/statistics', requestOptions)
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
+    try{
+      const req = await fetch('//localhost:4001/statistics', requestOptions)
+      const data = await req.json()
         const day = 1000 * 60 * 60 * 24
         const format = 'MM/DD/yyyy'
         var count_total = 0
@@ -95,10 +107,10 @@ class Statistics extends React.Component {
         localStorage.setItem('key3_count', key3_count)
         localStorage.setItem('key4_count', key4_count)
         localStorage.setItem('key5_count', key5_count)
-      })
-      .catch(error => {
+    }
+      catch(error){
         console.error(error)
-      })
+      }
   }
   render () {
     return (
