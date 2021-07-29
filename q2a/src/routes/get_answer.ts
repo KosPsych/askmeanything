@@ -9,4 +9,10 @@ router.get('/get_answers/:question_title',
         res.send(answers)
     })
 
+router.get('/get_answers',
+    async (req, res) => {
+        const answers = await getAnswers()
+        res.send(answers)
+    })
+
 export {router as GetAnswersRouter}
