@@ -1,0 +1,12 @@
+import express from 'express'
+import {getAnswers} from '../db_utils'
+const router = express.Router()
+
+router.get('/get_answers/:question_title',
+    async (req, res) => {
+        const title = req.params.question_title.replace(/-/g, " ")
+        const answers = await getAnswers(title)
+        res.send(answers)
+    })
+
+export {router as GetAnswersRouter}

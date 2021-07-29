@@ -11,6 +11,7 @@ import {ProfileRouter} from './routes/profile'
 import {QuestionviewRouter} from './routes/question_view'
 import {StatisticsRouter} from './routes/statistics'
 import {HomeRouter} from './routes/home'
+import {GetAnswersRouter} from './routes/get_answer'
 const URI=process.env.db_uri
 
 const connect = async ()=>{
@@ -33,6 +34,7 @@ app.use(ProfileRouter)
 app.use(QuestionviewRouter)
 app.use(StatisticsRouter)
 app.use(HomeRouter)
+app.use(GetAnswersRouter)
 
 app.listen(4001, ()=>{
     console.log('q2a service listening on 4001...')
