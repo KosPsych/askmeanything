@@ -18,7 +18,6 @@ router.post('/create_question',
             question_text:req.body.question_text,
             question_date:req.body.question_date,
             asked_by:req.app.locals.username,
-            answers: []
         })
 
         let answered = true
