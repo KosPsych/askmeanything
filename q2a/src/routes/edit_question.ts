@@ -27,13 +27,10 @@ router.post('/edit_question',
                 asked_by:req.app.locals.username
             })
             res.send('question edited')
-        }
-        else{
-            res.send('error in question editing')
-        }
-        await Answer.updateMany(
+            
+            await Answer.updateMany(
             { question_title: req.body.question_title,
-                question_user:req.body.asked_by
+              question_user:req.body.asked_by
             },
 
             {
@@ -41,6 +38,12 @@ router.post('/edit_question',
                     __v: 1
                 }
             })
+            
+        }
+        else{
+            res.send('error in question editing')
+        }
+        
 
     })
 
