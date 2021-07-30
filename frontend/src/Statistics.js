@@ -5,9 +5,9 @@ import Chart from 'react-google-charts'
 class Statistics extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = { key1_count: 0,key2_count: 0,key3_count: 0,key4_count: 0,key5_count: 0,key1:"-", key2:"-",key3:"-",key4:"-",key5:"-",today: 0,month:0,week:0,total:0};
   }
-  componentDidMount () {
+  async componentDidMount () {
     const requestOptions = {
       method: 'GET',
       headers: {
@@ -15,11 +15,9 @@ class Statistics extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//askmeanything.com/statistics', requestOptions)
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
+    try{
+      const req = await fetch('//localhost:4001/statistics', requestOptions)
+      const data = await req.json()
         const day = 1000 * 60 * 60 * 24
         const format = 'MM/DD/yyyy'
         var count_total = 0
@@ -50,10 +48,10 @@ class Statistics extends React.Component {
             keywords.push(item.keywords[count - 1])
           }
         })
-        localStorage.setItem('today', count_today)
-        localStorage.setItem('week', count_week)
-        localStorage.setItem('month', count_month)
-        localStorage.setItem('total', count_total)
+        this.setState({today:count_today});
+        this.setState({week:count_week});
+        this.setState({month:count_month});
+        this.setState({total:count_total});
 
         var count1 = {}
         keywords.forEach(function (i) {
@@ -63,11 +61,11 @@ class Statistics extends React.Component {
         var p = keys.sort(function (a, b) {
           return count1[b] - count1[a]
         })
-        localStorage.setItem('key1', p[0])
-        localStorage.setItem('key2', p[1])
-        localStorage.setItem('key3', p[2])
-        localStorage.setItem('key4', p[3])
-        localStorage.setItem('key5', p[4])
+        this.setState({key1:p[0]});
+        this.setState({key2:p[1]});
+        this.setState({key3:p[2]});
+        this.setState({key4:p[3]});
+        this.setState({key5:p[4]});
         var key1_count = 0
         var key2_count = 0
         var key3_count = 0
@@ -90,15 +88,15 @@ class Statistics extends React.Component {
             key5_count++
           }
         })
-        localStorage.setItem('key1_count', key1_count)
-        localStorage.setItem('key2_count', key2_count)
-        localStorage.setItem('key3_count', key3_count)
-        localStorage.setItem('key4_count', key4_count)
-        localStorage.setItem('key5_count', key5_count)
-      })
-      .catch(error => {
+        this.setState({key1_count : key1_count});
+        this.setState({key2_count : key2_count});
+        this.setState({key3_count : key3_count});
+        this.setState({key4_count : key4_count});
+        this.setState({key5_count : key5_count});
+    }
+      catch(error){
         console.error(error)
-      })
+      }
   }
   render () {
     return (
@@ -116,24 +114,24 @@ class Statistics extends React.Component {
               data={[
                 ['Keywords', 'appearances'],
                 [
-                  localStorage.getItem('key1'),
-                  localStorage.getItem('key1_count') * 1
+                  this.state.key1,
+                  this.state.key1_count*1
                 ],
                 [
-                  localStorage.getItem('key2'),
-                  localStorage.getItem('key2_count') * 1
+                  this.state.key2,
+                  this.state.key2_count*1
                 ],
                 [
-                  localStorage.getItem('key3'),
-                  localStorage.getItem('key3_count') * 1
+                  this.state.key3,
+                  this.state.key3_count*1
                 ],
                 [
-                  localStorage.getItem('key4'),
-                  localStorage.getItem('key4_count') * 1
+                  this.state.key4,
+                  this.state.key4_count*1
                 ],
                 [
-                  localStorage.getItem('key5'),
-                  localStorage.getItem('key5_count') * 1
+                  this.state.key5,
+                  this.state.key5_count*1
                 ]
               ]}
               options={{
@@ -155,10 +153,10 @@ class Statistics extends React.Component {
               loader={<div>Loading Chart</div>}
               data={[
                 ['Task', 'Hours per Day'],
-                ['Today', localStorage.getItem('today') * 1],
-                ['Week', localStorage.getItem('week') * 1],
-                ['Month', localStorage.getItem('month') * 1],
-                ['Total', localStorage.getItem('total') * 1]
+                 ['Today', this.state.today * 1],
+                ['Week', this.state.week * 1],
+                ['Month', this.state.month * 1],
+                ['Total', this.state.total* 1]
               ]}
               options={{
                 title: 'Questions statistics',
