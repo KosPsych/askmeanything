@@ -10,7 +10,6 @@ class AnswerQuestion extends React.Component {
     this.handleNeverMind = this.handleNeverMind.bind(this)
   }
   componentDidMount () {
-    localStorage.setItem('question_title','Null')
     const requestOptions = {
       method: 'GET',
       headers: {
@@ -18,7 +17,7 @@ class AnswerQuestion extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//localhost:4001/statistics', requestOptions)
+    fetch('//askmeanything.com/home', requestOptions)
       .then(response => {
         return response.json()
       })
@@ -31,10 +30,6 @@ class AnswerQuestion extends React.Component {
       })
   }
   handleSubmitAnswer () {
-    if(localStorage.getItem('question_title')==='Null' ){
-      alert('You need to choose a question')
-      window.location.reload();
-    }
     const format = 'MM/DD/yyyy'
     var newDate = new Date()
     var dateTime = moment(newDate).format(format)
@@ -42,7 +37,8 @@ class AnswerQuestion extends React.Component {
       answer_text: $('#Answertext').val(),
       question_title: localStorage.getItem('question_title'),
       question_user: localStorage.getItem('asked_by'),
-      answer_date: dateTime
+      answer_date: dateTime,
+      answered_by: localStorage.getItem('username')
     }
     const requestOptions = {
       method: 'POST',
@@ -52,17 +48,17 @@ class AnswerQuestion extends React.Component {
       },
       body: JSON.stringify(bodyFormData1)
     }
-    fetch('//localhost:4001/create_answer', requestOptions)
+    fetch('//askmeanything.com/create_answer', requestOptions)
       .then(response => {
-        window.location = '//localhost:3000/MyAnswers'
-        return response.json()
+        window.location = '//askmeanything.com/MyAnswers'
+        
       })
       .catch(error => {
         console.error(error)
       })
   }
   handleNeverMind () {
-    window.location = '//localhost:3000'
+    window.location = '//askmeanything.com'
   }
   render () {
     return (
@@ -128,52 +124,40 @@ class AnswerQuestion extends React.Component {
   }
   SelectQuestions (ev) {
     localStorage.setItem('question_title', ev.currentTarget.value)
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-OBSERVATORY-AUTH': localStorage.getItem('token')
-      }
-    }
-    fetch('//localhost:4001/get_answers/' + localStorage.getItem('question_title'), requestOptions)
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        var replacekeywords1 = []
-        var count = 0
-        data.map(function (item) {
-            count++
-            replacekeywords1.push(
-              '<h6 value=' +
-                item.answer_text +
-                '>' +
-                count +
-                '.' +
-                item.answer_text +
-                ' (from: ' +
-                item.answered_by +
-                ' ,date: ' +
-                item.answer_date +
-                ')' +
-                '</h6>'
-            )
-            var str1 = document.getElementById('answers').innerHTML
-        var res1 = str1.replace(str1, replacekeywords1)
-        document.getElementById('answers').innerHTML = res1
-        })
-      })
-      .catch(error => {
-        console.error(error)
-      })
     var types = []
+    var answers = []
     this.state.Information.forEach(function (item) {
       if (ev.currentTarget.value === item.title) {
+        answers.push(item.answers)
         types.push(item.keywords)
         localStorage.setItem('asked_by', item.asked_by)
       }
     })
-    
+    var replacekeywords1 = []
+    answers.map(function (item) {
+      var count = 0
+      while (item.length !== 0 && count < item.length) {
+        count++
+        replacekeywords1.push(
+          '<h6 value=' +
+            item[count - 1].answer_text +
+            '>' +
+            count +
+            '.' +
+            item[count - 1].answer_text +
+            ' (from: ' +
+            item[count - 1].answered_by +
+            ' ,date: ' +
+            item[count - 1].answer_date +
+            ')' +
+            '</h6>'
+        )
+      }
+    })
+    var str1 = document.getElementById('answers').innerHTML
+    var res1 = str1.replace(str1, replacekeywords1)
+    document.getElementById('answers').innerHTML = res1
+
     var replacekeywords2 = []
     types.forEach(function (item) {
       replacekeywords2.push('<h6 value=' + item + '>' + item + '</h6>')

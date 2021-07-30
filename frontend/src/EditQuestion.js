@@ -18,7 +18,7 @@ class EditQuestion extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//localhost:4001/statistics', requestOptions)
+    fetch('//askmeanything.com/statistics', requestOptions)
       .then(response => {
         return response.json()
       })
@@ -54,7 +54,6 @@ class EditQuestion extends React.Component {
     var x = document.forms['ask']['Questiontitle'].value
     if (x === '') {
       alert('Question title can not be empty')
-      window.location.reload();
     }
     var s = $('#keywords').val()
     var keyw = s.split(',')
@@ -66,7 +65,8 @@ class EditQuestion extends React.Component {
       new_question_title: $('#Questiontitle').val(),
       question_text: $('#Questiontext').val(),
       keywords: keyw,
-      asked_by: localStorage.getItem('username')
+      asked_by: localStorage.getItem('username'),
+      question_date: dateTime
     }
     const requestOptions = {
       method: 'POST',
@@ -77,9 +77,9 @@ class EditQuestion extends React.Component {
       },
       body: JSON.stringify(bodyFormData1)
     }
-    fetch('http://localhost:4001/edit_question', requestOptions)
+    fetch('http://askmeanything.com/edit_question', requestOptions)
       .then(res => {
-        window.location = '//localhost:3000/MyQuestions'
+        window.location = '//askmeanything.com/MyQuestions'
       })
       .catch(error => {
         window.location.reload()
@@ -88,7 +88,7 @@ class EditQuestion extends React.Component {
   }
 
   handleCancel () {
-    window.location = '//localhost:3000/MyQuestions'
+    window.location = '//askmeanything.com/MyQuestions'
   }
 
   render () {

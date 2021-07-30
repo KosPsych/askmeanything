@@ -15,7 +15,6 @@ class AskNewQuestion extends React.Component {
     var x = document.forms['ask']['Questiontitle'].value
     if (x === '') {
       alert('Question title can not be empty')
-      window.location.reload();
     }
     var s = $('#keywords').val()
     var keyw = s.split(',')
@@ -26,6 +25,7 @@ class AskNewQuestion extends React.Component {
       title: $('#Questiontitle').val(),
       question_text: $('#Questiontext').val(),
       keywords: keyw,
+      asked_by: localStorage.getItem('username'),
       question_date: dateTime
     }
     const requestOptions = {
@@ -37,9 +37,9 @@ class AskNewQuestion extends React.Component {
       },
       body: JSON.stringify(bodyFormData1)
     }
-    fetch('http://localhost:4001/create_question', requestOptions)
+    fetch('http://askmeanything.com/create_question', requestOptions)
       .then(res => {
-        window.location = '//localhost:3000/MyQuestions'
+        window.location = '//askmeanything.com/MyQuestions'
       })
       .catch(error => {
         window.location.reload()
@@ -48,7 +48,7 @@ class AskNewQuestion extends React.Component {
   }
 
   handleCancel () {
-    window.location = '//localhost:3000/MyAnswers'
+    window.location = '//askmeanything.com/MyAnswers'
   }
 
   render () {

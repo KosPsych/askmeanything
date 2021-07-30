@@ -15,18 +15,27 @@ class MyAnswers extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//localhost:4001/get_answers', requestOptions)
+    fetch('//askmeanything.com/statistics', requestOptions)
       .then(response => {
         return response.json()
       })
       .then(data => {
+        const states = { data }
+        var answers = []
         var useranswers = []
-        data.map(function (item) {
+        data.forEach(function (item) {
+          answers.push(item.answers)
+        })
+        answers.map(function (item) {
+          var count = 0
+          while (item.length !== 0 && count < item.length) {
+            count++
             if (
-              item.answered_by === localStorage.getItem('username')
+              item[count - 1].answered_by === localStorage.getItem('username')
             ) {
-              useranswers.push(item)
+              useranswers.push(item[count - 1])
             }
+          }
         })
         $(this.refs.main).DataTable({
           data: useranswers,
@@ -58,7 +67,7 @@ class MyAnswers extends React.Component {
         })
         $(this.refs.main).on('click', '.editBtn', function (ev) {
           localStorage.setItem('Answertext', ev.currentTarget.id)
-          window.location = '//localhost:3000/EditAnswer'
+          window.location = '//askmeanything.com/EditAnswer'
         })
       })
       .catch(error => {
