@@ -6,7 +6,7 @@ interface QuestionAttrs {
     title:string,
     question_text:string,
     question_date:string,
-    asked_by:string
+    asked_by:string,
 }
 
 interface QuestionModel extends mongoose.Model<QuestionDoc> {
@@ -18,7 +18,7 @@ interface QuestionDoc extends mongoose.Document{
     title:string,
     question_text:string,
     question_date:string,
-    asked_by:string
+    asked_by:string,
 }
 
 const QuestionSchema = new mongoose.Schema({
@@ -26,7 +26,7 @@ const QuestionSchema = new mongoose.Schema({
     title:String,
     question_text:String,
     question_date:String,
-    asked_by:String
+    asked_by:String,
 })
 
 QuestionSchema.statics.build = (attrs : QuestionAttrs)=>{
@@ -36,10 +36,10 @@ QuestionSchema.statics.build = (attrs : QuestionAttrs)=>{
 const Question = mongoose.model<QuestionDoc,QuestionModel>('questions',QuestionSchema)
 
 interface AnswerAttrs {
-
     answer_text:string,
     answer_date:string,
     answered_by:string,
+    question_id: number,
     question_title:string,
     question_user:string
 }
@@ -49,19 +49,19 @@ interface AnswerModel extends mongoose.Model<AnswerDoc> {
 }
 
 interface AnswerDoc extends mongoose.Document{
-
     answer_text:string,
     answer_date:string,
     answered_by:string,
+    question_id: number,
     question_title:string,
     question_user:string
 }
 
 const AnswerSchema = new mongoose.Schema({
-
     answer_text:String,
     answer_date:String,
     answered_by:String,
+    question_id: Number,
     question_title:String,
     question_user:String
 })

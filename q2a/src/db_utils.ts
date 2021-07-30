@@ -41,7 +41,10 @@ export async function add_answer(data:any) {
         },
         {
             $push:
-                { answers : {"answer_text":data.answer.answer_text,"answered_by":data.answer.answered_by,answer_date:data.answer.answer_date}
+                { answers :
+                        {"answer_text":data.answer.answer_text,
+                        "answered_by":data.answer.answered_by,
+                        answer_date:data.answer.answer_date}
                 }
 
         })

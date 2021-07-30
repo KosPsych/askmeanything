@@ -26,25 +26,21 @@ router.post('/edit_question',
                 keywords: req.body.keywords,
                 asked_by:req.app.locals.username
             })
-            res.send('question edited')
-            
             await Answer.updateMany(
-            { question_title: req.body.question_title,
-              question_user:req.body.asked_by
-            },
+                { question_title: req.body.question_title,
+                    question_user:req.body.asked_by
+                },
 
-            {
-                $set: { question_title: req.body.new_question_title,
-                    __v: 1
-                }
-            })
-            
+                {
+                    $set: { question_title: req.body.new_question_title,
+                        __v: 1
+                    }
+                })
+            res.send('question edited')
         }
         else{
             res.send('error in question editing')
         }
-        
-
     })
 
 export {router as EditQuestionRouter}

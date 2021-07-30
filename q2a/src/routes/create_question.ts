@@ -17,7 +17,7 @@ router.post('/create_question',
             title:req.body.title,
             question_text:req.body.question_text,
             question_date:req.body.question_date,
-            asked_by:req.app.locals.username,
+            asked_by:req.app.locals.username
         })
 
         let answered = true
