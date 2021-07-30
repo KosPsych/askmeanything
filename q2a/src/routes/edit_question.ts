@@ -1,6 +1,5 @@
 import express,{Request,Response}  from 'express'
-import {Question} from '../db_model'
-//import {natsclient} from '../nats-client'
+import {Question, Answer} from '../db_model'
 import {verifyToken, getUsername} from '../utils'
 const router = express.Router()
 
@@ -32,6 +31,16 @@ router.post('/edit_question',
         else{
             res.send('error in question editing')
         }
+        await Answer.updateMany(
+            { question_title: req.body.question_title,
+                question_user:req.body.asked_by
+            },
+
+            {
+                $set: { question_title: req.body.new_question_title,
+                    __v: 1
+                }
+            })
 
     })
 
