@@ -17,61 +17,69 @@ class EditAnswer extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//askmeanything.com/statistics', requestOptions)
+    fetch('//localhost:4001/get_answers', requestOptions)
       .then(response => {
         return response.json()
       })
       .then(data => {
-        var initial = data
-        this.setState({ Information: initial })
-        var Qansw = []
-        var Qtext = []
-        var Qtitle = []
-        this.state.Information.forEach(function (item) {
-          item.answers.map(function (item1) {
-            if (localStorage.getItem('Answertext') === item1.answer_text) {
-              Qtext.push(item.question_text)
-              Qtitle.push(item.title)
-              Qansw.push(item1.answer_text)
-              localStorage.setItem('question_user', item.asked_by)
+        var replacekeywords1 = []
+        var replacekeywords2 = []
+        var count = 0
+        data.forEach(function (item) {
+            if (localStorage.getItem('Answertext') === item.answer_text) {
+            count++
+            localStorage.setItem('Qtitle', item.question_title)
+            localStorage.setItem('Quser', item.question_user)
+            replacekeywords2.push('<h6 value=' + item.question_title + '>' + item.question_title + '</h6>')
+            replacekeywords1.push(
+              '<h6 value=' +
+                item.answer_text +
+                '>' +
+                count +
+                '.' +
+                item.answer_text +
+                ' (date: ' +
+                item.answer_date +
+                ')' +
+                '</h6>'
+            )
+            var str1 = document.getElementById('AnswerText').innerHTML
+        var res1 = str1.replace(str1, replacekeywords1)
+        document.getElementById('AnswerText').innerHTML = res1
+        var str2 = document.getElementById('QuestionTitle').innerHTML
+        var res2 = str1.replace(str2, replacekeywords2)
+        document.getElementById('QuestionTitle').innerHTML = res2
             }
           })
         })
-        localStorage.setItem('Qtitle', Qtitle[0])
-        $('#QuestionTitle').append(
-          '<h6 value=' + Qtitle[0] + '>' + Qtitle[0] + '</h6>'
-        )
-        $('#QuenstionText').append(
-          '<h6 value=' + Qtext[0] + '>' + Qtext[0] + '</h6>'
-        )
-        $('#AnswerText').append(
-          '<h6 value=' + Qansw[0] + '>' + Qansw[0] + '</h6>'
-        )
-      })
       .catch(error => {
         console.error(error)
       })
   }
   handleEdit () {
+    if ($('#Answer').val() === '') {
+      alert('Answer text can not be empty')
+      window.location.reload();
+    }
     var bodyFormData1 = {
       question_title: localStorage.getItem('Qtitle'),
       answer_text: $('#Answer').val(),
-      answered_by: localStorage.getItem('username'),
-      question_user: localStorage.getItem('question_user')
+      question_user: localStorage.getItem('Quser')
     }
-    
     const requestOptions = {
       method: 'POST',
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
         'x-observatory-auth': localStorage.getItem('token')
       },
       body: JSON.stringify(bodyFormData1)
     }
-    fetch('http://askmeanything.com/edit_answer', requestOptions)
+    fetch('http://localhost:4001/edit_answer', requestOptions)
       .then(res => {
-        window.location = '//askmeanything.com/MyAnswers'
+        return res
+      })
+      .then(response => {
+        window.location = '//localhost:3000/MyAnswers'
       })
       .catch(error => {
         window.location.reload()
@@ -80,7 +88,7 @@ class EditAnswer extends React.Component {
   }
 
   handleCancel () {
-    window.location = '//askmeanything.com/MyAnswers'
+    window.location = '//localhost:3000/MyAnswers'
   }
 
   render () {
@@ -99,8 +107,6 @@ class EditAnswer extends React.Component {
                   <div className='col-50'>
                     <h4>Question title: </h4>
                     <h6 id='QuestionTitle'></h6>
-                    <h4>Quenstion text: </h4>
-                    <h6 id='QuenstionText'></h6>
                     <h4>Answer text: </h4>
                     <h6 id='AnswerText'></h6>
                     <h4>Replace your answer text</h4>
