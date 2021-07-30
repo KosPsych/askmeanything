@@ -32,7 +32,6 @@ class SeeAnswers extends React.Component {
             Qtext.push(item.question_text)
             Qtitle.push(item.title)
             keyword.push(item.keywords)
-            answers.push(item.answers)
           }
         })
         Qtext.forEach(function (item) {
@@ -41,29 +40,56 @@ class SeeAnswers extends React.Component {
         Qtitle.forEach(function (item) {
           $('#Questiontitle').append('<h6 value=' + item + '>' + item + '</h6>')
         })
+        localStorage.setItem('question_title',Qtitle[0])
+        var replacekeywords2 = []
         keyword.forEach(function (item) {
-          $('#keyword').append('<h6 value=' + item + '>' + item + '</h6>')
+          replacekeywords2.push('<h6 value=' + item + '>' + item + '</h6>')
         })
-        answers.map(function (item) {
-          var count = 0
-          while (item.length !== 0 && count < item.length) {
-            count++
-            $('#answers').append(
-              '<h6 value=' +
-                item[count - 1].answer_text +
-                '>' +
-                count +
-                '.' +
-                item[count - 1].answer_text +
-                ' (from: ' +
-                item[count - 1].answered_by +
-                ' ,date: ' +
-                item[count - 1].answer_date +
-                ')' +
-                '</h6>'
-            )
+        var str2 = document.getElementById('keywords').innerHTML
+        var res2 = str2.replace(str2, replacekeywords2)
+        document.getElementById('keywords').innerHTML = res2
+        const requestOptions = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-OBSERVATORY-AUTH': localStorage.getItem('token')
           }
-        })
+        }
+        fetch(
+          '//localhost:4001/get_answers/' +
+            localStorage.getItem('question_title'),
+          requestOptions
+        )
+          .then(response => {
+            return response.json()
+          })
+          .then(data => {
+            var replacekeywords1 = []
+            var count = 0
+            data.map(function (item) {
+              count++
+              replacekeywords1.push(
+                '<h6 value=' +
+                  item.answer_text +
+                  '>' +
+                  count +
+                  '.' +
+                  item.answer_text +
+                  ' (from: ' +
+                  item.answered_by +
+                  ' ,date: ' +
+                  item.answer_date +
+                  ')' +
+                  '</h6>'
+              )
+              var str1 = document.getElementById('answers').innerHTML
+              var res1 = str1.replace(str1, replacekeywords1)
+              document.getElementById('answers').innerHTML = res1
+            })
+          })
+          .catch(error => {
+            console.error(error)
+          })
       })
       .catch(error => {
         console.error(error)
@@ -83,7 +109,7 @@ class SeeAnswers extends React.Component {
           ></link>
           <div className='body1'>
             <h2>
-              <i className='fa fa-commenting-o'></i>Answer a question
+              <i className='fa fa-commenting-o'></i>See the answer
             </h2>
             <div className='container'>
               <form action='/action_page.php'>

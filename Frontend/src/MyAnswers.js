@@ -15,27 +15,18 @@ class MyAnswers extends React.Component {
         'X-OBSERVATORY-AUTH': localStorage.getItem('token')
       }
     }
-    fetch('//localhost:4001/statistics', requestOptions)
+    fetch('//localhost:4001/get_answers', requestOptions)
       .then(response => {
         return response.json()
       })
       .then(data => {
-        const states = { data }
-        var answers = []
         var useranswers = []
-        data.forEach(function (item) {
-          answers.push(item.answers)
-        })
-        answers.map(function (item) {
-          var count = 0
-          while (item.length !== 0 && count < item.length) {
-            count++
+        data.map(function (item) {
             if (
-              item[count - 1].answered_by === localStorage.getItem('username')
+              item.answered_by === localStorage.getItem('username')
             ) {
-              useranswers.push(item[count - 1])
+              useranswers.push(item)
             }
-          }
         })
         $(this.refs.main).DataTable({
           data: useranswers,

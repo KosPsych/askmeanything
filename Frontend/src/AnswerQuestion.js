@@ -123,40 +123,52 @@ class AnswerQuestion extends React.Component {
   }
   SelectQuestions (ev) {
     localStorage.setItem('question_title', ev.currentTarget.value)
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-OBSERVATORY-AUTH': localStorage.getItem('token')
+      }
+    }
+    fetch('//localhost:4001/get_answers/' + localStorage.getItem('question_title'), requestOptions)
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        var replacekeywords1 = []
+        var count = 0
+        data.map(function (item) {
+            count++
+            replacekeywords1.push(
+              '<h6 value=' +
+                item.answer_text +
+                '>' +
+                count +
+                '.' +
+                item.answer_text +
+                ' (from: ' +
+                item.answered_by +
+                ' ,date: ' +
+                item.answer_date +
+                ')' +
+                '</h6>'
+            )
+            var str1 = document.getElementById('answers').innerHTML
+        var res1 = str1.replace(str1, replacekeywords1)
+        document.getElementById('answers').innerHTML = res1
+        })
+      })
+      .catch(error => {
+        console.error(error)
+      })
     var types = []
-    var answers = []
     this.state.Information.forEach(function (item) {
       if (ev.currentTarget.value === item.title) {
-        answers.push(item.answers)
         types.push(item.keywords)
         localStorage.setItem('asked_by', item.asked_by)
       }
     })
-    var replacekeywords1 = []
-    answers.map(function (item) {
-      var count = 0
-      while (item.length !== 0 && count < item.length) {
-        count++
-        replacekeywords1.push(
-          '<h6 value=' +
-            item[count - 1].answer_text +
-            '>' +
-            count +
-            '.' +
-            item[count - 1].answer_text +
-            ' (from: ' +
-            item[count - 1].answered_by +
-            ' ,date: ' +
-            item[count - 1].answer_date +
-            ')' +
-            '</h6>'
-        )
-      }
-    })
-    var str1 = document.getElementById('answers').innerHTML
-    var res1 = str1.replace(str1, replacekeywords1)
-    document.getElementById('answers').innerHTML = res1
-
+    
     var replacekeywords2 = []
     types.forEach(function (item) {
       replacekeywords2.push('<h6 value=' + item + '>' + item + '</h6>')
