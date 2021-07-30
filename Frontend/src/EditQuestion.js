@@ -65,7 +65,7 @@ class EditQuestion extends React.Component {
       new_question_title: $('#Questiontitle').val(),
       question_text: $('#Questiontext').val(),
       keywords: keyw,
-      question_date: dateTime
+      asked_by: localStorage.getItem('username')
     }
     const requestOptions = {
       method: 'POST',
