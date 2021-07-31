@@ -53,9 +53,9 @@ npm i
 ```
 npm start 
 ```
-If you wish,you can  create a kubernetes Cluster for your app via
+If you wish,you can  create a kubernetes Cluster for your app and run via
 ```
 skaffold dev
 ```
-in the root of the project's dir.
+in the root of the project's dir.This requires Docker,Kubernetes and skaffold to be installed.
 
