@@ -72,19 +72,19 @@ class Statistics extends React.Component {
         var key4_count = 0
         var key5_count = 0
         keywords.forEach(function (i) {
-          if (i === localStorage.getItem('key1')) {
+          if (i == p[0]) {
             key1_count++
           }
-          if (i === localStorage.getItem('key2')) {
+          if (i == p[1]) {
             key2_count++
           }
-          if (i === localStorage.getItem('key3')) {
+          if (i == p[2]) {
             key3_count++
           }
-          if (i === localStorage.getItem('key4')) {
+          if (i == p[3]) {
             key4_count++
           }
-          if (i === localStorage.getItem('key5')) {
+          if (i == p[4]) {
             key5_count++
           }
         })

@@ -1,0 +1,69 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    #nginx.ingress.kubernetes.io/use-regex : 'true'
+spec:
+  rules:
+    - host: askmeanything.com
+      http:
+        paths:
+          - path: /login
+            backend:
+              serviceName: auth-clusterip-srv
+              servicePort: 4000
+          - path: /signup
+            backend:
+              serviceName: auth-clusterip-srv
+              servicePort: 4000
+          - path: /get_user
+            backend:
+              serviceName: auth-clusterip-srv
+              servicePort: 4000  
+
+          - path: /create_answer
+            backend:
+              serviceName: q2a-clusterip-srv
+              servicePort: 4001
+          - path: /create_question
+            backend:
+              serviceName: q2a-clusterip-srv
+              servicePort: 4001
+          - path: /edit_answer
+            backend:
+              serviceName: q2a-clusterip-srv
+              servicePort: 4001
+          - path: /edit_question
+            backend:
+              serviceName: q2a-clusterip-srv
+              servicePort: 4001
+          - path: /get_answers
+            backend:
+              serviceName: q2a-clusterip-srv
+              servicePort: 4001
+          - path: /get_answers/(*)?
+            backend:
+              serviceName: q2a-clusterip-srv
+              servicePort: 4001
+          - path: /profile/(*)?
+            backend:
+              serviceName: q2a-clusterip-srv
+              servicePort: 4001
+          - path: /question_view/(*)?
+            backend:
+              serviceName: q2a-clusterip-srv
+              servicePort: 4001 
+          - path: /statistics
+            backend:
+              serviceName: q2a-clusterip-srv
+              servicePort: 4001
+          - path: /home
+            backend:
+              serviceName: q2a-clusterip-srv
+              servicePort: 4001                                      
+          - path: /
+            backend:
+              serviceName: client-clusterip-srv
+              servicePort: 3000

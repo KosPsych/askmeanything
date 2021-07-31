@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: q2a-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: q2a
+  template:
+    metadata:
+      labels:
+        app: q2a
+    spec:
+      containers:
+        - name: q2a
+          image: q2a
+          imagePullPolicy: IfNotPresent

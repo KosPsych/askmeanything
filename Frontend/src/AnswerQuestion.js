@@ -10,6 +10,7 @@ class AnswerQuestion extends React.Component {
     this.handleNeverMind = this.handleNeverMind.bind(this)
   }
   componentDidMount () {
+    localStorage.setItem('question_title','Null')
     const requestOptions = {
       method: 'GET',
       headers: {
@@ -30,6 +31,10 @@ class AnswerQuestion extends React.Component {
       })
   }
   handleSubmitAnswer () {
+    if(localStorage.getItem('question_title')==='Null' ){
+      alert('You need to choose a question')
+      window.location.reload();
+    }
     const format = 'MM/DD/yyyy'
     var newDate = new Date()
     var dateTime = moment(newDate).format(format)

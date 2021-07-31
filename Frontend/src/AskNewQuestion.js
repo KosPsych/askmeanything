@@ -15,6 +15,7 @@ class AskNewQuestion extends React.Component {
     var x = document.forms['ask']['Questiontitle'].value
     if (x === '') {
       alert('Question title can not be empty')
+      window.location.reload();
     }
     var s = $('#keywords').val()
     var keyw = s.split(',')

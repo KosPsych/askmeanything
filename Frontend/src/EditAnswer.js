@@ -57,6 +57,10 @@ class EditAnswer extends React.Component {
       })
   }
   handleEdit () {
+    if ($('#Answer').val() === '') {
+      alert('Answer text can not be empty')
+      window.location.reload();
+    }
     var bodyFormData1 = {
       question_title: localStorage.getItem('Qtitle'),
       answer_text: $('#Answer').val(),
